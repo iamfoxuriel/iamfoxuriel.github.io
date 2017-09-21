@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Rabear&#39;s</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://blog.rabears.com/"/>
+  <updated>2017-09-21T06:48:54.090Z</updated>
+  <id>https://blog.rabears.com/</id>
+  
+  <author>
+    <name>Jaden Zhuang</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于Facebook 的 React 专利许可证</title>
+    <link href="https://blog.rabears.com/2017/09/20/react-revocable-license/"/>
+    <id>https://blog.rabears.com/2017/09/20/react-revocable-license/</id>
+    <published>2017-09-20T02:33:22.000Z</published>
+    <updated>2017-09-21T06:48:54.090Z</updated>
+    
+    <content type="html"><![CDATA[<p>随着Apache、百度、Wordpress都在和Facebook的React.js以及其专利许可证划清界限，似乎大家又在讨论Facebook的这个BSD+PATENT的许可证问题了。这让我想起了之前在Medium读过的一篇文章——《<a href="https://medium.com/@dwalsh.sdlr/react-facebook-and-the-revokable-patent-license-why-its-a-paper-25c40c50b562" target="_blank" rel="external">React, Facebook, and the Revocable Patent License, Why It’s a Paper</a>》，我觉得那篇文章写的不错，而且还是一个会编程的律师写的，所以有必要把这篇文章传播到中文社区这边来。注意，我不会全部翻译，我只是用我的语言来负责搬运内容和观点，我只想通过这篇文章让大家了解一下这个世界以及专利相关的知识，这样可以避免你看到某乎的“怎么看待XXX”这类的问题时人云亦云，能有自己的独立思考和自我判断。;-)<br><a href="https://github.com/facebook/react/blob/master/PATENTS" target="_blank" rel="external">React Additional Grant of Patent Rights Version 2</a><br><a id="more"></a></p><p>这篇文章的作者叫Dennis Walsh，他自称是亚历桑那和加利福尼亚州的律师，主要针对版权法和专利诉论的法律领域。但是这个律师不一样，他更很喜欢商业和软件多一些。现在他用React/GraphQL/Elixir在写一个汽车代理销售相关的软件，而且已经发布到第2版了。</p><p>首先，作者表明，专利法经常被人误解，因为其实充满了各种晦涩难懂的法律术语，所以，作者用个例子来讲述专利的一个原则 —— <strong>专利并不是授于让你制造或开发的权利，而是授予你可以排他的权利。（</strong>事实上似乎也是这样，申请专利很多时候都不是为了制作相关的产品，而是为了防止别人使用类似的技术制作相关的产品）</p><p>如果有公司X为铅笔申请了专利，而另一家公司Y为把用于铅笔的橡皮擦申请了专利。那么，公司X可以阻止公司Y来生产铅笔，而对带橡皮擦的铅笔没办法，但是公司Y的专利可以让公司X不能生产带有橡皮擦的铅笔。</p><p>所以，公司Y的橡皮擦专利又被广泛地叫作“<a href="https://definitions.uslegal.com/b/blocking-patent/" target="_blank" rel="external">Blocking Patent</a>”。公司Y不能说他发明了铅笔，因为这是公司X的专利，但是，他们可以让公司X无法对铅笔做出某些改进。</p><p>于是，因为这种 Blocking Patent 存在，对于开源的公司是不利的，因为根据上面的那个例子来说，开源公司就是公司X，他们做了一个基础的软件，而公司Y在上面做了些改进，并注册成了专利，从而导致开源的公司X无法对它基础开源软件作出被公司Y专利阻止的改进，开源的公司X希望能够自由地使用公司Y的橡皮擦专利，因为毕竟是它发明了铅笔并放弃了铅笔的专利。</p><p>于是就出来了“专利反击条款”（<a href="https://en.wikipedia.org/wiki/Software_patents_and_free_software#Patent_retaliation" target="_blank" rel="external">Patent Retaliation Clauses</a>）。一般来说有两种专利条款，一种是弱条款，一种是强条款。</p><p>Weak Patent Retaliation Clauses – 这种条款声明，如果许可证持有者用某个专利来打击许可证颁布者，那么专利就视为终止。用人话来表达就是，公司X做了一个开源铅笔，而公司Y注册了橡皮檫专利。此时，公司X做了一支带像皮擦的铅笔，而公司Y马上对公司X提起专利侵权诉讼。那么，公司Y就失去了对底层铅笔的专利控制。（正如前面所说的，公司Y的橡皮擦专利因为在起诉公司X的开源铅笔，而失去了对开源铅笔的专利排他权利）</p><p>Strong Patent Retailiation Clauses – 这种条款声明比“弱条款”要的更多。具体来说就是，任何专利声明终结许可证，而不管这个专利有没有和你基础的软件有关系。用人话来说就是，公司Y使用他们的热气球专利来起诉公司X，那么公司Y就失去了他们对铅笔的专利限制。</p><p>我个人理解起来，这两种条款看上去是防御性质的。</p><p>Facebook的React的Patent License如下：</p><blockquote><p>The license granted hereunder will terminate, automatically and without notice,if you (or any of your subsidiaries, corporate affiliates or agents) initiatedirectly or indirectly, or take a direct financial interest in, any Patent Assertion: (i) against Facebook or any of its subsidiaries or corporateaffiliates, (ii) against any party if such Patent Assertion arises in whole orin part from any software, technology, product or service of Facebook or any ofits subsidiaries or corporate affiliates, or (iii) against any party relating to the Software. Notwithstanding the foregoing, if Facebook or any of itssubsidiaries or corporate affiliates files a lawsuit alleging patentinfringement against you in the first instance, and you respond by filing apatent infringement counterclaim in that lawsuit against that party that isunrelated to the Software, the license granted hereunder will not terminateunder section (i) of this paragraph due to such counterclaim.</p></blockquote><p>这些条款中和基础软件没有任何关系，所以，<strong>这个条款是“强专利反击条款”</strong>。</p><p>在后面，本文的作者又解解释了，为什么React的“强专利反击条款”就跟没有似的。他在文中针对一些歇斯底里的言论，如：“Facebook不用害怕专利诉讼了，而且他可以随时偷袭你家的专利仓库”，也作出了一些解释来分析这个事。</p><p>Contractural Liability – 意思是说，专利方面的东西只会影响专利上的事，而不会影响和专利无关的事，React底层协议是BSD-3许可证还是会被保留。换句话说，React的“强专利反击条款”只生效于专利层面，而不会对非常专利的软件使用产生问题，如果和专利无关，React还是走BSD-3的许可协议。</p><p>Copyright Liability – 这个和Contractural Liablitity 一样。作者说，如果有人有特别的案例或是有说服力的论据来说明Facebook的这个条款会作用于非专利的地方，那么，请告诉他。</p><p>Patent Liability – 专利的责任和损害是两件事，非专业人士总是会把其搞混。</p><p>第一个问题是Liability， 要搞清这个事，得搞清“Patent’s Claims”，而不是这个技术的技术规格说明，技术规格说明和权力主张是两码事。作者说，现在的很多专利都是一些想法，很多投机份子随便一拍脑袋就发明出一个想法，然后就去注册专利了。但是可以被用来法律执行的只有“Patent’s Claims”（专利的权利主张），而不是那些想法。这些权利主张相当相当的晦涩难读，而且是会故意被模糊掉的，因为，当你清楚的定义了你的发明是什么，那么，就可以清楚的定义出来什么不是你的发明。比如：一个铅笔专利权利主张里说，“这一个用石墨和木头组合起来的写字工具”，那么，只要我不用木头和石墨来做组合，而是用塑料来做组合，那么我就不是专利侵权。所以，一般来说，专利主张是会更为通用一些，比如，“这是一个用于涂画表面的装置，其包括：与涂画端相连的握持端”。作者这里给了一个<a href="https://www.google.com/patents/US8046721" target="_blank" rel="external">苹果公司的滑动解锁专利</a>的示例。可以感受一下产品规格说明和专利权利主张完全是两码事。</p><p>专利这些事，在法律界里是非常非常困难作出评估的。所以，这个社会每年都会给律师们几十亿美金来一遍又一遍地回答这些问题，而且律师还经常回答错了。而对于美国的法律，对于专利诉讼会有一个叫<a href="https://en.wikipedia.org/wiki/Markman_hearing" target="_blank" rel="external">Markman hearing的审前听证会</a>（马克曼听证会），自从1996年美国最高法的“<a href="https://en.wikipedia.org/wiki/Markman_v._Westview_Instruments,_Inc." target="_blank" rel="external">马克曼诉威斯幽仪器公司案</a>”这个听证会就变成了一个惯例，美国联邦法院用这个听证会来向决定专利权利主张的解释，而且，上诉法院还经常性的推翻审判法院的裁决。（对于美国法律来说，一般是法官认证法律，陪审团认定事实，然而，对于专利而言，1996年的那个案件认为专利术语是一个需要法官决定的法律问题，而不是陪审团决定的事实问题。关于马克曼听证会的事，可以参看本文未尾的附录）</p><p>所以，要决定Facebook的专利责任，我们需要评估Facebook的专利及其权利主张，而不是技术规格说明。具体来说，要明确Facebook对于React这个底层技术的专利权利主张是什么？但是作者搜了一下，发现什么也没有找到。也就是说，对于USPTO（美国专利商标局）或法院来说，他们没办法对Facebook的这样没有为React申请专利的方式来执行任何和专利的诉讼，也就是说，Facebook的这个React License的条款，美国政府是无法在法律上支持的。</p><p>第二个问题是专利损害。就算是Facebook可以评估出来一个合法可执行的专利来保护React，对于专利损害也是很有问题的。作者说他到目前还没有发现一个开源软件被专利侵权的事，就算有这样的案例，也不会是这里说的这个事。作者觉得在这个事上操作起来就是一个笑话。</p><p>另外，作者认为，React 专利许可证这个事就是个纸老虎。因为，一方面，这个专利不像电信通讯里的那些专利，你拿不掉。作者认为要从你的代码中把React去掉虽然难，但是也不是什么很难的事，另外，要打这样的专利官司，一般来说，在美国至少要花100-200万美金的费用才能发起诉讼，而要胜诉则需要需要200多万到2000万美金的费用，你觉得你要花多钱才能把React从你的代码库中剔除？肯定比这钱少。</p><p>作者还认为，Facebook玩这个事虽然出发点不错，但是感觉并不聪明，从目前的情况看下来，就像他想咬你一口，但却没有牙。</p><p>后面，作者还说了一下，转成别的框架会不会有问题？比如：你用Preact/Vue或是你自研的东西？作者说，未必，如果Facebook真的为React注册了专利，比如：React里的组件技术、虚拟DOM渲染技术等等。那么，你用Preact/Vue或是带这样技术的自研的框架，那么，从你使用的第一天就在侵犯Facebook的专利权了。然而，使用React反而不会有这么大的风险，因为Facebook让你免费的用React。作者说，用别的框架的法律风险比用其它替代品的风险更高。</p><p>后面，作者也更新了一篇文章 《<a href="https://medium.com/@dwalsh.sdlr/using-graphql-why-facebook-now-owns-you-3182751028c9" target="_blank" rel="external">Using GraphQL? Why Facebook Now Owns You</a>》，意思是，用React可能还好，但是用GraphQL就有问题了。因为找到了GraphQL的专利—— <a href="https://patents.google.com/patent/US9646028" target="_blank" rel="external">“Graph Query Logic”</a>。</p><p>后来我查了一下，我发现，React也有个相关的专利—— “<a href="https://patents.google.com/patent/US9003278" target="_blank" rel="external">Efficient event delegation in browser scripts</a> ”，看上去和虚拟DOM渲染有关。Holy Shit!</p><p>好了，用还是不用React我也不知道，总之，这个世界比较复杂，我只是想借这篇文章来学习一下法律上的相关东西，欢迎听到大家的观点。</p><p>最后，请允许我调侃一下来结束本文——“不用担心React的许可证问题，因为前端不是一年半就用新的框架重写一次么？”哈哈。</p><h4 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h4><h5 id="马克曼听证会-–-Markman-Hearing"><a href="#马克曼听证会-–-Markman-Hearing" class="headerlink" title="马克曼听证会 – Markman Hearing"></a>马克曼听证会 – Markman Hearing</h5><p>马克曼听证会的一些背景知识，下面的文字来源于《<a href="http://www.sipo.gov.cn/sipo2013/mtjj/2013/201303/t20130320_788543.html" target="_blank" rel="external">“马克曼听证”制度的由来及启示</a>》</p><p>与美国专利诉讼的悠长历史相比，1996年才经美国最高法院确立的“马克曼听证”（Markman Hearing，也称为Claim Construction，即权利要求书的解释）无疑是一项年轻的制度。但由于几乎所有的专利侵权诉讼中都会遇到涉案专利权利要求书的解释这一核心问题，且因“马克曼听证”结果往往清楚地预示了案件结果，经“马克曼听证”获得有利结论的一方一旦据此向法庭提起不审即判的动议，专利侵权诉讼往往可就此快速了结，因此该制度的确立成为美国专利诉讼历史上的一件大事。</p><p>“马克曼听证”制度的由来</p><p>“马克曼听证”制度确立之前，在专利侵权诉讼中的权利要求书解释，通常交由陪审团在对案件事实进行裁决时一并做出，且并不会在诉讼文件上单独就陪审团这一问题的判断进行记录。1991年，马克曼（Markman）先生因认为其拥有的专利号为RE33054的“干洗衣物贮存及追踪控制装置”专利权被Westview公司所侵犯，遂向宾夕法尼亚州东区联邦地方法院提起了专利侵权诉讼。</p><p>该专利是用扫描的方式，将客户的衣物编号扫描后输入电脑中做分类标示，并在衣物干洗过程中追踪衣物位置，干洗完成后自动将衣物放回客户固定的存贮位置。被告的产品则是同时运用扫描器和电脑两种方式，将客户干洗衣物的资料存入电脑并显示费用、日期等相关信息。本案陪审团的裁决认为被告装置构成对原告专利权利的侵犯，但该地方法院认为系争专利与被告装置在功能实施上并不一致，遂推翻陪审团的裁决，判决被告不构成侵权。</p><p>马克曼不服，于1995年向联邦上诉法院提起上诉，但其上诉理由仅为联邦地方法院错误地解释了陪审团关于专利权利要求书解释中某个词语的涵义。联邦上诉法院在审理该案时，将案件的核心问题定为两个：一是原告对于请求项解释有无权利请求陪审团裁决;二是联邦地方法院是否正确地解释了“Inventory”一词。该院多数法官经审理后认为，权利要求书范围的解释与确定，属于法律问题而非事实问题，因而属于法院权限，而不应交由陪审团决定，且此前将此问题交由陪审团确定并不妥当。同时，由于认为原告专利与被告装置存在实质功能上的差异，联邦上诉法院亦不认为被告构成专利侵权。少数持不同意见的该院法官主要是质疑这一结论违反了美国第七宪法修正案（即所有根据美国法律进行的普通法诉讼，只要争议金额超过20美元，即有要求陪审团审判的权利）。</p><p>马克曼不服，向最高法院提出上诉。1996年4月23日，美国最高法院就马克曼诉Westview器械公司案（Markman v. Westview Instruments, Inc. 517 U.S. 370 （1996））做出终审裁决，裁决认定：权利要求书的解释是联邦地区法院法官应当处理的法律问题，而不是应当由陪审团来认定的事实问题，尽管在解释权利要求书的过程中可能会包含一些对于事实问题的解释，且这样做并不违反第七修正案赋予给陪审团的权利。这一裁决标志着“马克曼听证”制度的正式确立。</p><p>“马克曼听证”制度的不足</p><p>该案判决是美国专利诉讼史上的一个重大转折。“马克曼听证”成为法官专门用于解释专利权利要求的一个经常性听证程序，用以解决专利侵权诉讼的核心问题。由于该听证并非普遍适用，因此，十几年来，联邦民事诉讼规则并未正式对其有任何规定，而是给予法院绝对的自由裁量权。但是，何时可以进行“马克曼听证”?如何进行?是否有必要进行?类似问题在一定程度上困扰了审理专利侵权案件较多的法院。</p><p>2001年，加州北区联邦地区法院率先制定了供本法院使用的专利审判专属规则（Patent Local Rules），其中第四部分即为权利要求书的解释程序（Claim Construction Proceddings），对“马克曼听证”的时间、流程、限制及当事人的义务均进行了规定。此后，各州纷纷效仿。目前，乔治亚州北区联邦法院、得克萨斯州东区联邦法院、得克萨斯州南区联邦法院、宾夕法尼亚州西区联邦法院等都制订了书面的“马克曼听证”程序指南。近年来，不断有新的案例在解释与细化着“马克曼听证”，如2006年的Wilson Sporting Goods Co.诉Hillerich &amp; Bradsby Co.案，2005年的Phillips诉AWH Corp.案，2008年的Howmedica Osteonics Corp.诉Wright Medical Technology, Inc.案，这些司法实践大大拓展与丰富了“马克曼听证”使用的实体和程序规则，使之日渐成为美国专利诉讼中一个复杂、完备的司法程序。以至于竟然有人开发了模拟“马克曼听证”程序，只要你愿意，可以下载并训练，以熟悉和确保有真正的权利要求书解释时不会出现不利于自己的问题。</p><p>但是，该听证带来的问题也逐渐受到重视。有人质疑说该程序导致专利诉讼费用增加，因为“马克曼听证”通常会单独进行，且程序复杂，因此导致当事人花费大量的时间与精力，更为重要的是，由于40%至60%的联邦地区法院案件会在联邦巡回上诉法院被推翻，因此，花费巨大的“马克曼听证”似乎价值有限。同时，权利要求书的解释要求是不多不少，忠实于技术发明思想与发明事实，但由于地区法院分散，法官的相关技术知识不十分专业，将权利要求书解释这样的问题交给他们，难免会带来一些无法克服的问题。</p><p>“马克曼听证”制度的启示</p><p>我国民事诉讼中并无陪审团制度，案件的事实问题与法律问题均由法官审理与确定。在专利侵权诉讼中，对于案件中涉及到的技术问题可以通过专家鉴定等方式解决，但并不因此免除法官审理案件的义务，即法律问题的判断归于法官，事实的法律属性判断仍然归于法官。同时，权利要求书的解释在我国的专利侵权诉讼中并不是一个单独的程序，而是合并在案件审理过程中。因此，仅就我国的司法审判而言，“马克曼听证”制度并无直接的借鉴意义。</p><p>但是，对于那些已经走出和正在走出国门的企业来说，了解与掌握这一重要的专利诉讼程序却是极其重要的。通领科技集团的积极尝试充分证明了这一点，而且随着这一程序的不断成熟，美国国际贸易法院（ITC）也开始在审理时适用“马克曼听证”制度。所以，知道“马克曼听证”意味着什么，确保所提交的用于解释权利要求的文件确实充分，学会利用“马克曼听证”，无论是对于破解美国的专利诉讼威胁，还是为未来准备有效的法律武器，无疑都非常重要。（知识产权报　作者　魏玮）</p><blockquote><p>本文转载自 <a href="https://coolshell.cn/articles/18140.html" target="_blank" rel="external">CoolShell</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;随着Apache、百度、Wordpress都在和Facebook的React.js以及其专利许可证划清界限，似乎大家又在讨论Facebook的这个BSD+PATENT的许可证问题了。这让我想起了之前在Medium读过的一篇文章——《&lt;a href=&quot;https://medium.com/@dwalsh.sdlr/react-facebook-and-the-revokable-patent-license-why-its-a-paper-25c40c50b562&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React, Facebook, and the Revocable Patent License, Why It’s a Paper&lt;/a&gt;》，我觉得那篇文章写的不错，而且还是一个会编程的律师写的，所以有必要把这篇文章传播到中文社区这边来。注意，我不会全部翻译，我只是用我的语言来负责搬运内容和观点，我只想通过这篇文章让大家了解一下这个世界以及专利相关的知识，这样可以避免你看到某乎的“怎么看待XXX”这类的问题时人云亦云，能有自己的独立思考和自我判断。;-)&lt;br&gt;&lt;a href=&quot;https://github.com/facebook/react/blob/master/PATENTS&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React Additional Grant of Patent Rights Version 2&lt;/a&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Tech" scheme="https://blog.rabears.com/categories/Tech/"/>
+    
+      <category term="ReactJs" scheme="https://blog.rabears.com/categories/Tech/ReactJs/"/>
+    
+    
+      <category term="react" scheme="https://blog.rabears.com/tags/react/"/>
+    
+      <category term="license" scheme="https://blog.rabears.com/tags/license/"/>
+    
+      <category term="facebook" scheme="https://blog.rabears.com/tags/facebook/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Stephen Hawking launches Centre for the Future of Intelligence</title>
+    <link href="https://blog.rabears.com/2016/10/26/stephen-hawking/"/>
+    <id>https://blog.rabears.com/2016/10/26/stephen-hawking/</id>
+    <published>2016-10-25T17:55:37.000Z</published>
+    <updated>2017-09-21T06:51:28.276Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Alongside the benefits, AI will also bring dangers, like powerful autonomous weapons, or new ways for the few to oppress the many.</p><footer><strong>Stephen Hawking</strong><cite><a href="http://www.cam.ac.uk/research/news/the-best-or-worst-thing-to-happen-to-humanity-stephen-hawking-launches-centre-for-the-future-of" target="_blank" rel="external">www.cam.ac.uk</a></cite></footer></blockquote><p>Artificial intelligence has the power to eradicate poverty and disease or hasten the end of human civilisation as we know it – according to a speech delivered by Professor Stephen Hawking this evening.</p><blockquote class="pullquote right"><p>Alongside the benefits, AI will also bring dangers, like powerful autonomous weapons, or new ways for the few to oppress the many.</p></blockquote><p>“Success in creating AI could be the biggest event in the history of our civilisation,” said Professor Hawking. “But it could also be the last – unless we learn how to avoid the risks. Alongside the benefits, AI will also bring dangers like powerful autonomous weapons or new ways for the few to oppress the many.</p><p>“We cannot predict what we might achieve when our own minds are amplified by AI. Perhaps with the tools of this new technological revolution, we will be able to undo some of the damage done to the natural world by the last one – industrialisation.”</p><p>The Centre for the Future of Intelligence will initially focus on seven distinct projects in the first three-year phase of its work, reaching out to brilliant researchers and connecting them and their ideas to the challenges of making the best of AI. Among the initial research topics are: ‘Science, value and the future of intelligence’; ‘Policy and responsible innovation’; ‘Autonomous weapons – prospects for regulation’ and ‘Trust and transparency’.</p><a id="more"></a><p>The Academic Director of the Centre, and Bertrand Russell Professor of Philosophy at Cambridge, Huw Price, said: “The creation of machine intelligence is likely to be a once-in-a-planet’s-lifetime event. It is a future we humans face together. Our aim is to build a broad community with the expertise and sense of common purpose to make this future the best it can be.”</p><p>Many researchers now take seriously the possibility that intelligence equal to our own will be created in computers within this century. Freed of biological constraints, such as limited memory and slow biochemical processing speeds, machines may eventually become more intelligent than we are – with profound implications for us all.</p><p>AI pioneer Professor Maggie Boden (University of Sussex) sits on the Centre’s advisory board and spoke at this evening’s launch. She said: “AI is hugely exciting. Its practical applications can help us to tackle important social problems, as well as easing many tasks in everyday life. And it has advanced the sciences of mind and life in fundamental ways. But it has limitations, which present grave dangers given uncritical use. CFI aims to pre-empt these dangers, by guiding AI development in human-friendly ways.”</p><p>“Recent landmarks such as self-driving cars or a computer game winning at the game of Go, are signs of what’s to come,” added Professor Hawking. “The rise of powerful AI will either be the best or the worst thing ever to happen to humanity. We do not yet know which. The research done by this centre is crucial to the future of our civilisation and of our species.”</p><p>Transcript of Professor Hawking’s speech at the launch of the Leverhulme Centre for the Future of Intelligence, October 19, 2016</p><p>“It is a great pleasure to be here today to open this new Centre.  We spend a great deal of time studying history, which, let’s face it, is mostly the history of stupidity.  So it is a welcome change that people are studying instead the future of intelligence.</p><p>Intelligence is central to what it means to be human.  Everything that our civilisation has achieved, is a product of human intelligence, from learning to master fire, to learning to grow food, to understanding the cosmos. </p><p>I believe there is no deep difference between what can be achieved by a biological brain and what can be achieved by a computer.  It therefore follows that computers can, in theory, emulate human intelligence — and exceed it.</p><p>Artificial intelligence research is now progressing rapidly.  Recent landmarks such as self-driving cars, or a computer winning at the game of Go, are signs of what is to come.  Enormous levels of investment are pouring into this technology.  The achievements we have seen so far will surely pale against what the coming decades will bring.</p><p>The potential benefits of creating intelligence are huge.  We cannot predict what we might achieve, when our own minds are amplified by AI.  Perhaps with the tools of this new technological revolution, we will be able to undo some of the damage done to the natural world by the last one — industrialisation.  And surely we will aim to finally eradicate disease and poverty.  Every aspect of our lives will be transformed.  In short, success in creating AI, could be the biggest event in the history of our civilisation.</p><p>But it could also be the last, unless we learn how to avoid the risks.  Alongside the benefits, AI will also bring dangers, like powerful autonomous weapons, or new ways for the few to oppress the many.   It will bring great disruption to our economy.  And in the future, AI could develop a will of its own — a will that is in conflict with ours.</p><p>In short, the rise of powerful AI will be either the best, or the worst thing, ever to happen to humanity.  We do not yet know which.  That is why in 2014, I and a few others called for more research to be done in this area.  I am very glad that someone was listening to me! </p><p>The research done by this centre is crucial to the future of our civilisation and of our species.  I wish you the best of luck!”</p><h2 id="以下为霍金演讲全文的中文版："><a href="#以下为霍金演讲全文的中文版：" class="headerlink" title="以下为霍金演讲全文的中文版："></a>以下为霍金演讲全文的中文版：</h2><p>今天，非常荣幸来来这里参加新中心的开启仪式。</p><p>我们花了大把的时间研究历史，让我们来直面这部历史，这近乎是部愚昧的历史。所以，人们现在转而研究未来的智慧了，这种转变将备受欢迎。</p><p>对人类而言，智慧是存在的核心所在。一切文明，皆是智慧的产物。从学会用火，到学会耕种，到理解宇宙。</p><p>我相信，生物的大脑所获得的智慧，与计算机所能获得的智慧，并无本质区别。因此，理论上，计算机可以模拟人类智慧，并超越它。</p><p>现在人工智能的研究日新月异。最新的标志性成果，比如自动驾驶汽车、阿尔法狗战胜围棋世界高手，预示着即将到来新的时代。大小额投资纷纷倾注于这个领域。我们迄今为止所见到的成就，在新时代面前，即将黯然失色。</p><p>人工智能的带来的益处是巨大的。我们无法预测，当人类心智被人工智能扩展时，我们会取得哪些成就。也许，有了这个技术革命的新工具，我们能够有能力弥补一些由工业化对自然界造成的破坏。当然，我们希望能够最终消灭疾病和贫穷。我们生活的方方面面都会被变化。简而言之，人工智能的成功创造，可以说是人类文明史上最大的事件。</p><p>但是，它也可能是人类文明史的终结，除非我们学会如何避免它所带来的危害。人工智能在带来益处的同时，也带来危险，比如强大的自动武器，或少数人欺压多数人的新方法。它也可能给我们的经济带来巨大的破坏。将来，人工智能可能会发展出来它自己的意志——一个与人类相冲突的意志。</p><p>总之，人工智能的强力崛起，在人类历史上，可能是最好的，也可能是最糟糕的。而我们尚且不知道会是哪一个。这是为什么在2014年，我和其它几个人呼吁在这个领域进行更多研究。令我欣慰的是，有人听到了我的呼声！</p><p>这个中心的研究，对我们人类文明的将来，对我们人类这个物种而言，都是极其关键的。祝大家好运！</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;p&gt;Alongside the benefits, AI will also bring dangers, like powerful autonomous weapons, or new ways for the few to oppress the many.&lt;/p&gt;
+&lt;footer&gt;&lt;strong&gt;Stephen Hawking&lt;/strong&gt;&lt;cite&gt;&lt;a href=&quot;http://www.cam.ac.uk/research/news/the-best-or-worst-thing-to-happen-to-humanity-stephen-hawking-launches-centre-for-the-future-of&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;www.cam.ac.uk&lt;/a&gt;&lt;/cite&gt;&lt;/footer&gt;&lt;/blockquote&gt;
+&lt;p&gt;Artificial intelligence has the power to eradicate poverty and disease or hasten the end of human civilisation as we know it – according to a speech delivered by Professor Stephen Hawking this evening.&lt;/p&gt;
+&lt;blockquote class=&quot;pullquote right&quot;&gt;&lt;p&gt;Alongside the benefits, AI will also bring dangers, like powerful autonomous weapons, or new ways for the few to oppress the many.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;“Success in creating AI could be the biggest event in the history of our civilisation,” said Professor Hawking. “But it could also be the last – unless we learn how to avoid the risks. Alongside the benefits, AI will also bring dangers like powerful autonomous weapons or new ways for the few to oppress the many.&lt;/p&gt;
+&lt;p&gt;“We cannot predict what we might achieve when our own minds are amplified by AI. Perhaps with the tools of this new technological revolution, we will be able to undo some of the damage done to the natural world by the last one – industrialisation.”&lt;/p&gt;
+&lt;p&gt;The Centre for the Future of Intelligence will initially focus on seven distinct projects in the first three-year phase of its work, reaching out to brilliant researchers and connecting them and their ideas to the challenges of making the best of AI. Among the initial research topics are: ‘Science, value and the future of intelligence’; ‘Policy and responsible innovation’; ‘Autonomous weapons – prospects for regulation’ and ‘Trust and transparency’.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Translation" scheme="https://blog.rabears.com/categories/Translation/"/>
+    
+      <category term="AI" scheme="https://blog.rabears.com/categories/Translation/AI/"/>
+    
+    
+      <category term="Stephen Hawking" scheme="https://blog.rabears.com/tags/Stephen-Hawking/"/>
+    
+      <category term="霍金" scheme="https://blog.rabears.com/tags/%E9%9C%8D%E9%87%91/"/>
+    
+      <category term="AI" scheme="https://blog.rabears.com/tags/AI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>待业青年</title>
+    <link href="https://blog.rabears.com/2010/04/28/unemployed-guys/"/>
+    <id>https://blog.rabears.com/2010/04/28/unemployed-guys/</id>
+    <published>2010-04-28T11:33:38.000Z</published>
+    <updated>2017-09-21T06:48:54.077Z</updated>
+    
+    <content type="html"><![CDATA[<p>在待业的这些日子里 看了红透网络的《待业青年》<br>简介是这样的：<br><blockquote class="pullquote"><p>这样的一群年轻人，他们才华横溢，他们生不逢时，他们崇尚艺术，他们叛逆，他们无助，他们被认为是社会的渣滓，而他们自命不凡，他们有情有义，他们 有时自甘堕落，他们有时愤世嫉俗，他们有时终日买醉，他们有时迷茫不已……</p></blockquote><br>——谨以此片献给我们逝去的青春 特别是那些不喜欢上学的孩子<br><a id="more"></a><br>好吧 也许只是做自己喜欢的事 结果被冠名叛逆<br><img src="/2010/04/28/unemployed-guys/unemployeed.jpg" alt="待业青年" title="待业青年"></p><p>我一个人在这里，不是因为不想被任何人打扰，而是不希望打扰任何人。<br>拿着文凭，不一定吃上饭；拿不到这个，肯定吃不到饭。<br>我现在的理想是搞清楚我的理想是什么。<br>现在在咱们国家学法律，就好像在津巴布韦学经济一样。<br>在进学校之前，每个人都不一样；进学校之后，每个人都一样。这是你个人的问题，你的能力不如老师，你被老师压制，最后你只能被老师教育得同化。<br>如果你没有独立经济能力，如果还在找家庭要钱，那么永远别叛逆。谁给你钱，谁就是你爷。<br>老师瞧不起我，家里看不起我，但我不能放弃自己。从此我就有了报复的心态，我要让他们统统大跌眼镜，让他们知道他们错了。<br>他们不理解，我也不需要他们理解。<br>在大学读书，尤其是文科科目，我很讨厌一点。就是老师学生都知道书上写的是谎话，但在考试时，必须把这谎话写上去才是正确的，才是能得分的。<br>那些老师重视的只是学生的分，以及学生家长在哪个职位上工作。<br>我只是选择我适合干的事情，我只是没有按照你们的意思做。结果被社会统称为——叛逆。<br>很可惜，你长大了，你没有勇气改变了。<br>让普通人二十多岁才应该明白的事情，让我们十几岁就明白，这种心理落差，你受得了么？<br>永远不要把爱好当做职业，如果你不够坚强，你会连这些爱好都失去。<br>只是多年以后，当我回忆起往事，记得年轻的时候，曾经做过我真正想做的事情，够了。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在待业的这些日子里 看了红透网络的《待业青年》&lt;br&gt;简介是这样的：&lt;br&gt;&lt;blockquote class=&quot;pullquote&quot;&gt;&lt;p&gt;这样的一群年轻人，他们才华横溢，他们生不逢时，他们崇尚艺术，他们叛逆，他们无助，他们被认为是社会的渣滓，而他们自命不凡，他们有情有义，他们 有时自甘堕落，他们有时愤世嫉俗，他们有时终日买醉，他们有时迷茫不已……&lt;/p&gt;
+&lt;/blockquote&gt;&lt;br&gt;——谨以此片献给我们逝去的青春 特别是那些不喜欢上学的孩子&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Caprices" scheme="https://blog.rabears.com/categories/Caprices/"/>
+    
+    
+      <category term="待业青年" scheme="https://blog.rabears.com/tags/%E5%BE%85%E4%B8%9A%E9%9D%92%E5%B9%B4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>柏林墙倒20年</title>
+    <link href="https://blog.rabears.com/2009/11/08/20th-anniversary-of-the-fall-of-the-berlin-wall/"/>
+    <id>https://blog.rabears.com/2009/11/08/20th-anniversary-of-the-fall-of-the-berlin-wall/</id>
+    <published>2009-11-08T05:58:29.000Z</published>
+    <updated>2017-09-21T06:48:54.099Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p><p>与此同时，世界上最大的苏维埃政权-苏联内部也正面临着分崩的境遇，不到两年，苏联正式解体，各国也开始了国家资本主义的征途。</p><p>而经历了“事件”之后的中国，在社会主义市场经济的掩护下，进行了国家官僚资本化改革道路。</p><p>历史是如此相似，资本主义真的是世界的唯一选择？这句话可能为时尚早，金融海啸还未过去，世界也并没有证明真的就是平的。</p><p>这不仅是“文明的冲突”，更是各种利益的角斗–纷杂的文明，复杂的利益，树起更多无名之墙，让本不美好的世界更加分裂。而人类必须跨越文明与利益双重“高墙”，才能真正实现 同一个世界，同一个梦想。</p><p>但，可惜这只是我们美好的愿景，实质的墙虽然倒了，世界仍不公平。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;柏林墙是一个标志，也是一段记忆。&lt;/p&gt;
+&lt;p&gt;1989年的11月9日，柏林墙在东、西德人民的欢呼声中倒塌。在柏林墙倒塌20年之后，那里的人们是否真正“跨跃”了那道墙？&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Caprices" scheme="https://blog.rabears.com/categories/Caprices/"/>
+    
+    
+      <category term="Berliner Mauer" scheme="https://blog.rabears.com/tags/Berliner-Mauer/"/>
+    
+      <category term="柏林墙" scheme="https://blog.rabears.com/tags/%E6%9F%8F%E6%9E%97%E5%A2%99/"/>
+    
+  </entry>
+  
+</feed>
