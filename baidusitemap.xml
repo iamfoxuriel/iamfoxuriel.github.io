@@ -4,8 +4,35 @@
 
     
   <url>
+    <loc>https://blog.rabears.com/2014/06/27/column-based-storage/</loc>
+    <lastmod>2017-09-27T09:09:53.944Z</lastmod>
+    <data>
+        <display>
+        <title>列式存储(Column Based Storage)</title>
+        <pubTime>2014-06-27T08:13:41.000Z</pubTime>
+        
+        <tag>列存储</tag>
+         
+        <tag>数据压缩</tag>
+         
+        <tag>Column Based Storage</tag>
+         
+         
+           
+             
+              <breadCrumb title="Tech" url="https://blog.rabears.com/categories/Tech/"/>
+          
+             
+              <breadCrumb title="Big Data" url="https://blog.rabears.com/categories/Tech/Big-Data/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://blog.rabears.com/2016/10/26/stephen-hawking/</loc>
-    <lastmod>2017-09-21T06:51:28.276Z</lastmod>
+    <lastmod>2017-09-21T08:14:47.262Z</lastmod>
     <data>
         <display>
         <title>Stephen Hawking launches Centre for the Future of Intelligence</title>
