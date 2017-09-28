@@ -1,0 +1,781 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Rabear&#39;s">
+    <title>Java 9 – The Ultimate Feature List - Rabear&#39;s</title>
+    <meta name="author" content="Jaden Zhuang">
+    
+    
+        <link rel="icon" href="https://blog.rabears.com/assets/images/favicon.ico">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="Java 9 的发布在历经多次跳票之后，终于正式发布。从这个版本开始，Java 将每半年发布一个版本。 本文翻译自Java 9 Ultimate Feature List, 让我们看看这次发布我们将拥有哪些高级特性。openjdk.java.net">
+<meta name="keywords" content="Java 9,新特性,Java">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Java 9 – The Ultimate Feature List">
+<meta property="og:url" content="https://blog.rabears.com/2017/09/27/java-9-new-feature/index.html">
+<meta property="og:site_name" content="Rabear&#39;s">
+<meta property="og:description" content="Java 9 的发布在历经多次跳票之后，终于正式发布。从这个版本开始，Java 将每半年发布一个版本。 本文翻译自Java 9 Ultimate Feature List, 让我们看看这次发布我们将拥有哪些高级特性。openjdk.java.net">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://384uqqh5pka2ma24ild282mv.wpengine.netdna-cdn.com/wp-content/uploads/2014/09/Java-9-Telescope.png">
+<meta property="og:updated_time" content="2017-09-28T04:56:45.900Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java 9 – The Ultimate Feature List">
+<meta name="twitter:description" content="Java 9 的发布在历经多次跳票之后，终于正式发布。从这个版本开始，Java 将每半年发布一个版本。 本文翻译自Java 9 Ultimate Feature List, 让我们看看这次发布我们将拥有哪些高级特性。openjdk.java.net">
+<meta name="twitter:image" content="http://384uqqh5pka2ma24ild282mv.wpengine.netdna-cdn.com/wp-content/uploads/2014/09/Java-9-Telescope.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://blog.rabears.com/assets/images/profile.png"/>
+    
+    
+        <meta property="og:image" content="https://blog.rabears.com/2017/09/27/java-9-new-feature/openjdk.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://blog.rabears.com/2017/09/27/java-9-new-feature/openjdk.png" />
+    
+    
+    
+    
+        <script src="/assets/js/gitment.browser.js"></script>
+        <link rel="stylesheet" href="/assets/css/gitment.css">
+    
+    <!--STYLES-->
+    <!--STYLES END-->
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-sxklfps8ywgfyyjcowvnb4gxdgt0zjts3hsguljmv9uqanxjbnitrovtbrek.min.css">
+    <!--STYLES END-->
+    
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="5">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">Rabear&#39;s</a>
+    </div>
+    
+        
+            <a  class="header-right-icon open-algolia-search"
+                href="#search">
+        
+        
+            <i class="fa fa-lg fa-search"></i>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="5">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.png" alt="作者的图片"/>
+                </a>
+                <h4 class="sidebar-profile-name">Jaden Zhuang</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Developer <span class='amp'>&amp;</span> Dreamer <br/> Life’s a struggle <br/> 有多少夜痛苦烦恼着你无法入睡…</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/ "
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-categories"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-tags"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-archives"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link open-algolia-search"
+                             href="#search"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="#about"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="https://github.com/iamfoxuriel" target="_blank" rel="noopener">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="http://www.linkedin.com/in/jadenzhuang/" target="_blank" rel="noopener">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="mailto:iamfoxuriel@gmail.com" target="_blank" rel="noopener">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                        <span class="sidebar-button-desc">邮箱</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/atom.xml"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="5"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Java 9 – The Ultimate Feature List
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-09-27T19:42:01+08:00">
+	
+		    9月 27, 2017
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/Translation/">Translation</a>, <a class="category-link" href="/categories/Translation/Java/">Java</a>
+
+
+    
+</div>
+
+    
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <blockquote><footer><strong>Java 9 的发布在历经多次跳票之后，终于正式发布。从这个版本开始，Java 将每半年发布一个版本。 本文翻译自Java 9 Ultimate Feature List, 让我们看看这次发布我们将拥有哪些高级特性。</strong><cite><a href="http://openjdk.java.net/projects/jdk9/" target="_blank" rel="external">openjdk.java.net</a></cite></footer></blockquote>
+<a id="more"></a>
+<p><a href="http://384uqqh5pka2ma24ild282mv.wpengine.netdna-cdn.com/wp-content/uploads/2014/09/Java-9-Telescope.png" target="_blank" rel="external"><img src="http://384uqqh5pka2ma24ild282mv.wpengine.netdna-cdn.com/wp-content/uploads/2014/09/Java-9-Telescope.png" alt="Java 9 Telescope"></a></p>
+<p><strong>This post will be updated with new features targeted at the upcoming Java 9 release</strong> </p>
+<p>The OpenJDK development is picking up speed: after the Java 8 launch in March 2014, we’re expecting to enter a 2 year release cycle. Java 9 will reportedly be released in 2016, and the JEPs (JDK Enhancement Proposals) that target the release keep getting published. Moreover, some JSRs (Java Specification Requests) are already being worked on and we’ve also added a hint of other features that might be included.</p>
+<p>The flagship features are the Jigsaw project, significant performance improvements and long awaited APIs including: Process API updates, JSON as part of java.util and a money handling API. For those of you who want to be on the bleeding edge, JDK 9 early access builds are already available <a href="https://jdk9.java.net/" target="_blank" rel="external">here</a>.</p>
+<p>In this post we’ll keep updating around the main new features for Java 9 and what they’re all about. So stay tuned for additional updates!</p>
+<h2 id="Table-of-contents"><a href="#Table-of-contents" class="headerlink" title="Table of contents"></a>Table of contents</h2><p><span style="color: #339966;"><span style="color: #000000;">1.</span> [Accepted]</span> <a href="#jigsaw">Project Jigsaw – Modular Source Code</a><br><span style="color: #339966;"><span style="color: #000000;">2.</span> [Accepted]</span> <a href="#processapi">Process API Updates</a><br><span style="color: #339966;"><span style="color: #000000;">3.</span> [Accepted]</span> <a href="#jsonapi">Light Weight JSON API</a><br><span style="color: #339966;"><span style="color: #000000;">4.</span> [Accepted]</span> <a href="#moneyapi">Money and Currency API</a><br><span style="color: #339966;"><span style="color: #000000;">5.</span> [Accepted]</span> <a href="#locking">Improved Contended Locking</a><br><span style="color: #339966;"><span style="color: #000000;">6.</span> [Accepted] </span><a href="#codecache">Segmented Code Cache</a><br><span style="color: #339966;"><span style="color: #000000;">7.</span> [Accepted] </span><a href="#sjavac">Smart Java Compilation – Phase Two</a><br><span style="color: #339966;"><span style="color: #ff9900;"><span style="color: #000000;">8.</span> [Expected]</span> </span><a href="#http2">HTTP 2 Client</a><br><span style="color: #ff9900;"><span style="color: #000000;">9.</span> [</span><span style="color: #ff9900;">Expected</span><span style="color: #ff9900;">] </span><a href="#repl">REPL in Java</a></p>
+<h3 id="Update-20-11-2014"><a href="#Update-20-11-2014" class="headerlink" title="Update 20/11/2014:"></a>Update 20/11/2014:</h3><p><span style="color: #339966;"><span style="color: #000000;">10.</span> [Accepted]</span> <a href="#unifiedlogging">Unified JVM Logging</a><br><span style="color: #339966;"><span style="color: #000000;">11.</span> [Accepted]</span> <a href="#compilercontrol">Compiler Control</a><br><span style="color: #339966;"><span style="color: #000000;">12.</span> [Accepted]</span> <a href="#dtls">Datagram Transport Layer Security (DTLS)</a><br><span style="color: #339966;"><span style="color: #000000;">13.</span> [Accepted]</span> <a href="#javadoc">HTML5 Javadoc</a></p>
+<h3 id="Additional-fixes-cleanup"><a href="#Additional-fixes-cleanup" class="headerlink" title="Additional fixes / cleanup:"></a>Additional fixes / cleanup:</h3><p><span style="color: #339966;"><span style="color: #000000;">14.</span> [Accepted]</span> <a href="#elideimport">Elide Deprecation Warnings on Import Statements</a><br><span style="color: #339966;"><span style="color: #000000;">15.</span> [Accepted]</span> <a href="#doclint">Resolve Lint and Doclint Warnings</a><br><span style="color: #339966;"><span style="color: #000000;">16.</span> [Accepted]</span> <a href="#millingcoin">Milling Project Coin</a><br><span style="color: #339966;"><span style="color: #000000;">17.</span> [Accepted]</span> <a href="#removegc">Remove GC Combinations Deprecated in JDK 8</a><br><span style="color: #339966;"><span style="color: #000000;">18.</span> [Accepted]</span> <a href="#processimport">Process Import Statements Correctly</a><br><span style="color: #000000;">19.</span> <a href="#newfeatures">Where do new features come from?</a></p>
+<h2 id="Accepted-features"><a href="#Accepted-features" class="headerlink" title="Accepted features"></a>Accepted features</h2><p><a name="jigsaw"></a></p>
+<h3 id="1-Project-Jigsaw-–-Modular-Source-Code"><a href="#1-Project-Jigsaw-–-Modular-Source-Code" class="headerlink" title="1. Project Jigsaw – Modular Source Code"></a>1. Project Jigsaw – Modular Source Code</h3><p><a href="http://openjdk.java.net/projects/jigsaw/" title="Project Jigsaw" target="_blank" rel="external">Project Jigsaw</a>’s goal is to make Java modular and break the <a href="http://www.oracle.com/technetwork/java/javase/tech/index.html" target="_blank" rel="external">JRE</a> to interoperable components, one of the most hyped features for Java 9. This JEP is the first out of <a href="http://mail.openjdk.java.net/pipermail/jigsaw-dev/2014-July/003417.html" target="_blank" rel="external">4 steps</a> towards Jigsaw and will not change the actual structure of the JRE and JDK. The purpose of this step is to reorganize the JDK source code into modules, enhance the build system to compile modules, and enforce module boundaries at build time. The project was originally intended for Java 8 but was delayed since and retargeted at Java 9.<br>Jigsaw项目是为了模块化Java代码、将JRE分成可相互协作的组件，这也是Java 9 众多特色种的一个。JEP是迈向Jigsaw四步中的第一步，它不会改变JRE和JDK的真实结构。JEP是为了模块化JDK源代码，让编译系统能够模块编译并在构建时检查模块边界。这个项目原本是随Java 8发布的，但由于推迟，所以将把它加到Java 9.</p>
+<p>Once it’s finished, it would allow creating a scaled down runtime Jar (rt.jar) customised to the components a project actually needs. The JDK 7 and JDK 8 rt.jar’s have about 20,000 classes that are part of the JDK even if many of them aren’t really being used in a specific envrionment (although a partial solution is included in the Java 8 <a href="http://www.oracle.com/technetwork/java/embedded/resources/tech/compact-profiles-overview-2157132.html" title="Java 8 Compact Features" target="_blank" rel="external">compact profiles</a> feature). The motivation behind this is to make Java easily scalable to small computing devices (Internet of Things), improve security and performance, and make it easier for developers to construct and maintain libraries.<br>一旦它完成，它可能允许根据一个项目需求自定义组件从而减少rt.jar的大小。在JDK 7 和JDK 8的rt.jar包中有大约20,000个类，但有很多类在一些特定的环境里面并没有被用到(即使在Java 8的紧凑分布特性中已经包含了一部分解决方法也存在着类冗余)。这么做是为了能让Java能够容易应用到小型计算设备(比如网络设备)中，提高它的安全和性能，同时也能让开发者更容易构建和维护这些类库。</p>
+<p><a href="http://openjdk.java.net/jeps/201" title="JEP 201" target="_blank" rel="external">More about JEP 201</a></p>
+<p><a name="processapi"></a></p>
+<h3 id="2-Process-API-Updates"><a href="#2-Process-API-Updates" class="headerlink" title="2. Process API Updates"></a>2. Process API Updates</h3><p>So far there has been a limited ability for controlling and managing operating system processes with Java. For example, in order to do something as simple as get your process PID today, you would need to either access native code or use some sort of a workaround. More than that, it would require a different implementation for each platform to guarantee you’re getting the right result.<br>截止到目前，Java控制与管理系统进程的能力是有限的。举个例子，现在为了简便获取你程序的进程PID，你要么调用本地程序要么要自己使用一些变通方案。更多的是，每个（系统）平台需要有一个不同实现来确保你能获得正确的结果。<br>In Java 9, expect the code for retrieving Linux PIDs, that now looks like this:</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    Process proc = Runtime.getRuntime().exec(<span class="keyword">new</span> String[]&#123; <span class="string">"/bin/sh"</span>, <span class="string">"-c"</span>, <span class="string">"echo $PPID"</span> &#125;);</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (proc.waitFor() == <span class="number">0</span>)</div><div class="line">    &#123;</div><div class="line">        InputStream in = proc.getInputStream();</div><div class="line">        <span class="keyword">int</span> available = in.available();</div><div class="line">        <span class="keyword">byte</span>[] outputBytes = <span class="keyword">new</span> <span class="keyword">byte</span>[available];</div><div class="line"></div><div class="line">    in.read(outputBytes);</div><div class="line">    String pid = <span class="keyword">new</span> String(outputBytes);</div><div class="line"></div><div class="line">    System.out.println(<span class="string">"Your pid is "</span> + pid);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">    </div></pre></td></tr></table></figure>
+<p>To turn into something like this (that also supports all operating systems):<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">System.out.println(<span class="string">"Your pid is "</span> + Process.getCurrentPid());</div><div class="line"> </div></pre></td></tr></table></figure></p>
+<p>The update will extend Java’s ability to to interact with the operating system: New direct methods to handle PIDs, process names and states, and ability to enumerate JVMs and processes and more.<br>这次更新将会扩展Java与操作系统的交互能力：新增一些新的直接明了的方法去处理PIDs，进程名字和状态以及枚举多个JVM和进程以及更多事情。</p>
+<p><a href="http://openjdk.java.net/jeps/102" title="JEP 102" target="_blank" rel="external">More about JEP 102</a><br><a name="jsonapi"></a></p>
+<h3 id="3-Light-Weight-JSON-API"><a href="#3-Light-Weight-JSON-API" class="headerlink" title="3. Light-Weight JSON API"></a>3. Light-Weight JSON API</h3><p>Currently there are alternatives available for handling JSON in Java, what’s unique about this API is that it would be part of the language, lightweight and would use the new capabilities of Java 8. And will be delivered right through java.util (Unlike <a href="https://jsonp.java.net/" title="JSONP" target="_blank" rel="external">JSR 353</a> which uses an external package or other <a href="https://code.google.com/p/google-gson/" title="google-gson" target="_blank" rel="external">alternatives</a>).</p>
+<p>目前有多种处理JSON的Java工具，但JSON API 独到之处在于JSON API将作为Java语言的一部分，轻量并且运用Java 8的新特性。它将放在java.util包里一起发布(但在JSR 353里面的JSON是用第三方包或者其他的方法处理的).<br>** Code samples coming soon!</p>
+<p><a href="http://openjdk.java.net/jeps/198" title="JEP 198" target="_blank" rel="external">More about JEP 198</a><br><a name="moneyapi"></a></p>
+<h3 id="4-Money-and-Currency-API"><a href="#4-Money-and-Currency-API" class="headerlink" title="4. Money and Currency API"></a>4. Money and Currency API</h3><p>After the new <a href="http://blog.takipi.com/5-features-in-java-8-that-will-change-how-you-code/#datetime" title="Date and Time API" target="_blank" rel="external">Date and Time API</a> introduced in Java 8, Java 9 brings with it a new and official API for representing, transporting, and performing comprehensive calculations with Money and Currency. To find out more about the project, you can visit JavaMoney on Github. Code and usage examples are already available right here . Here are a few highlights:<br>在Java 8引进了日期和时间的API之后, Java 9引入了新的货币API, 用以表示货币, 支持币种之间的转换和各种复杂运算. 关于这个项目的具体情况, 请访问<a href="https://github.com/JavaMoney,里面已经给出了使用说明和示例" target="_blank" rel="external">https://github.com/JavaMoney,里面已经给出了使用说明和示例</a>, 以下是几个重要的例子:<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Money amt1 = Money.of(<span class="number">10.1234556123456789</span>, <span class="string">"USD"</span>); <span class="comment">// Money is a BigDecimal</span></div><div class="line">FastMoney amt2 = FastMoney.of(<span class="number">123456789</span>, <span class="string">"USD"</span>); <span class="comment">// FastMoney is up to 5 decimal places</span></div><div class="line">Money total = amt1.add(amt2);      </div><div class="line">   </div></pre></td></tr></table></figure></p>
+<p><em>The new money types: Money &amp; FastMoney</em></p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">MonetaryAmountFormat germanFormat = MonetaryFormats.getAmountFormat( Locale.GERMANY);</div><div class="line">System.out.println(germanFormat.format(monetaryAmount)); <span class="comment">// 1.202,12 USD</span></div><div class="line">   </div></pre></td></tr></table></figure>
+<p><em>Formatting money according to different countries</em></p>
+<p><a href="https://jcp.org/en/jsr/detail?id=354" title="JSR 354" target="_blank" rel="external">More about JSR 354</a><br><a name="locking"></a></p>
+<h3 id="5-Improve-Contended-Locking"><a href="#5-Improve-Contended-Locking" class="headerlink" title="5. Improve Contended Locking"></a>5. Improve Contended Locking</h3><p>Lock contention is a performance bottleneck for many multithreaded Java applications. The enhancement proposal looks into improving the performance of Java object monitors as measured by different benchmarks. One of the these tests is <a href="http://www.volano.com/benchmarks.html" title="Volano" target="_blank" rel="external">Volano</a>. It simulates a chat server with huge thread counts and client connections, many of them trying to access the same resources and simulate a heavy duty real world application.</p>
+<p>These kind of stress tests push JVMs to the limit and try to determine the maximum throughput they can achieve, usually in terms of messages per second. The ambitious success metric for this JEP is a significant improvement over 22 different benchmarks. If the effort will succeed, these performance improvements will be rolling out in Java 9.</p>
+<p>锁争用是限制许多Java多线程应用性能的瓶颈. 新的机制在改善Java对象监视器的性能方面已经得到了多种基准(benchmark)的验证, 其中包括Volano. 测试中通讯服务器开放了海量的进程来连接客户端, 其中有很多连接都申请同一个资源, 以此模拟重负荷日常应用.</p>
+<p>通过诸如此类的压力测试我们可以估算JVM的极限吞吐量(每秒的消息数量). JEP在22种不同的测试中都得到了出色的成绩, 新的机制如果能在Java 9中得到应用的话, 应用程序的性能将会大大提升.<br><a href="http://openjdk.java.net/jeps/143" title="JEP 143" target="_blank" rel="external">More about JEP 143</a><br><a name="codecache"></a></p>
+<h3 id="6-Segmented-Code-Cache"><a href="#6-Segmented-Code-Cache" class="headerlink" title="6. Segmented Code Cache"></a>6. Segmented Code Cache</h3><p>Another performance improvement for Java 9 is coming from the JIT compiler angle. When certain areas of code are executed rapidly, the VM compiles them to native code and stores them in the code cache. This update looks into segmenting the code cache to different areas of compiled code in order to improve the compiler’s performance.</p>
+<p>Instead of a single area, the code cache will be segmented into 3 by the code’s lifetime in the cache:<br>– Code that will stay in the cache forever (JVM internal / non-method code)<br>– Short lifetime (Profiled code, specific to a certain set of conditions)<br>– Potentially long lifetime (Non-profiled code)<br>The segmentation would allow for several performance improvements to happen. For example, the method sweeper would be able to skip non-method code and act faster.</p>
+<p>Java 9的另一个性能提升来自于JIT(Just-in-time)编译器. 当某段代码被大量重复执行的时候, 虚拟机会把这段代码编译成机器码(native code)并储存在代码缓存里面, 进而通过访问缓存中不同分段的代码来提升编译器的效率.</p>
+<p>和原来的单一缓存区域不同的是, 新的代码缓存根据代码自身的生命周期而分为三种:</p>
+<ul>
+<li>永驻代码(JVM 内置 / 非方法代码)</li>
+<li>短期代码(仅在某些条件下适用的配置性(profiled)代码)</li>
+<li>长期代码(非配置性代码)</li>
+</ul>
+<p>缓存分段会在各个方面提升程序的性能, 比如做垃圾回收扫描的时候可以直接跳过非方法代码(永驻代码), 从而提升效率.</p>
+<p><a href="http://openjdk.java.net/jeps/197" title="JEP 197" target="_blank" rel="external">More about JEP 197</a><br><a name="sjavac"></a></p>
+<h3 id="7-Smart-Java-Compilation-Phase-Two"><a href="#7-Smart-Java-Compilation-Phase-Two" class="headerlink" title="7. Smart Java Compilation, Phase Two"></a>7. Smart Java Compilation, Phase Two</h3><p>The Smart Java Compilation tool, or sjavac, was first worked on around <a href="http://openjdk.java.net/jeps/139" title="JEP 139" target="_blank" rel="external">JEP 139</a> in order to improve JDK build speeds by having the javac compiler run on all cores. With JEP 199, it enters Phase Two, where it will be improved and generalized so that it can be used by default and build other projects than the JDK.</p>
+<p>智能Java编译工具sjavac的第一阶段开始于JEP 139这个项目, 用于在多核处理器上提升JDK的编译速度. 现在这个项目已经进入第二阶段(JEP 199), 目的是改进sjavac并让其成为取代目前JDK编译工具javac的Java默认的通用编译工具.<br><a href="http://openjdk.java.net/jeps/199" title="JEP 199" target="_blank" rel="external">More about JEP 199</a></p>
+<h2 id="What-else-to-expect"><a href="#What-else-to-expect" class="headerlink" title="What else to expect?"></a>What else to expect?</h2><p><a name="http2"></a></p>
+<h3 id="8-HTTP-2-Client"><a href="#8-HTTP-2-Client" class="headerlink" title="8. HTTP 2 Client"></a>8. HTTP 2 Client</h3><p>HTTP 2.0 hasn’t been released yet as a standard but it will be submitted for final review soon and it’s expected to be finalized before the release of Java 9. JEP 110 will define and implement a new HTTP client for Java that will replace HttpURLConnection, and also implement HTTP 2.0 and websockets. It wasn’t published as an accepted JEP yet but its targeting Java 9 and we expect it to be included.</p>
+<p>The official HTTP 2.0 RFC release date is currently set to February 2015, building on top of Google’s SPDY algorithm. SPDY has already shown great speed improvements over HTTP 1.1 ranging between 11.81% to 47.7% and its implementation already exists in most modern browsers.</p>
+<p>HTTP 2.0标准虽然还没正式发布, 但是已经进入了最终审查阶段, 预计可以在Java 9发布之前审查完毕. JEP 110将会重新定义并实现一个全新的Java HTTP客户端, 用来取代现在的HttpURLConnection, 同时也会实现HTTP 2.0和网络接口(原文websockets). 它现在还没被JEP正式认可但我们希望在Java 9中包含这一项目的内容.</p>
+<p>官方的HTTP 2.0 RFC(Request for Comments, 官方技术讨论/会议记录等等的一系列文档记录)预订于2015年2月发布, 它是基于Google发布的SPDY(Speedy, 快速的)协议. 基于SPDY协议的网络相对于基于HTTP 1.1协议的网络有11.81%到47.7%之间的显著提速, 现在已经有浏览器实现了这个协议.<br><a href="http://openjdk.java.net/jeps/110" title="JEP 110" target="_blank" rel="external">More about JEP 110</a><br><a name="repl"></a></p>
+<h3 id="9-Project-Kulla-–-REPL-in-Java"><a href="#9-Project-Kulla-–-REPL-in-Java" class="headerlink" title="9. Project Kulla – REPL in Java"></a>9. Project Kulla – REPL in Java</h3><p>Recently announced, a bit unlikely to hit Java 9 but might make it on time with a targeted integration date set in April 2015. Today there’s no “native” Java way to REPL (Read-Eval-Print-Loop). Meaning, if you want to run a few lines of Java to check out them quickly on their own you will have to wrap it all in a separate project or method. There are REPL add-ons to popular IDEs and some other solutions like Java REPL, but no official way to do this so far – Project Kulla might be the answer.</p>
+<p>这个取名为Kulla的项目最近宣布将于2015年4月整合测试, 虽然已经不太有希望能赶上Java 9的发布, 但如果进度快的话或许刚好能赶上. 现在Java并没有来自官方的REPL(Read-Eval-Print-Loop)方式, 也就是说现在如果你想要跑几行Java代码做一个快速的测试, 你仍然需要把这几行代码封装在项目或者方法里面. 虽然在一些流行的IDE里面有Java REPL工具, 但它们并没有官方支持, 而Kulla项目或许就能成为Java官方发布的REPL解决方案.<br><a href="http://mail.openjdk.java.net/pipermail/announce/2014-August/000181.html" title="Project Kulla" target="_blank" rel="external">More about Project Kulla</a></p>
+<p><a name="unifiedlogging"></a></p>
+<h3 id="10-Unified-JVM-Logging"><a href="#10-Unified-JVM-Logging" class="headerlink" title="10. Unified JVM Logging"></a>10. Unified JVM Logging</h3><p>Today it’s hard to make sense of the root cause for performance issues and crashes of the JVM. One way to tackle this is introducing one single system for all JVM components that would allow fine-grained, and easy-to-configure JVM logging. Currently, different components of the JVM use different mechanisms and conventions for logging, making it harder to debug.</p>
+<p><a href="http://openjdk.java.net/jeps/158" target="_blank" rel="external">More about JEP 158</a><br><a name="compilercontrol"></a></p>
+<h3 id="11-Compiler-Control"><a href="#11-Compiler-Control" class="headerlink" title="11. Compiler Control"></a>11. Compiler Control</h3><p>Taking on the HotSpot JVM and extending the controls for compiler options down to the method level. After this update, the JIT compiler options could be modified even during runtime depending on the specific method that’s being compiled.</p>
+<p><a href="http://openjdk.java.net/jeps/165" target="_blank" rel="external">More about JEP 165</a><br><a name="dtls"></a></p>
+<h3 id="12-Datagram-Transport-Layer-Security-DTLS"><a href="#12-Datagram-Transport-Layer-Security-DTLS" class="headerlink" title="12. Datagram Transport Layer Security (DTLS)"></a>12. Datagram Transport Layer Security (DTLS)</h3><p>Adding DTLS support, a secure way to communicate using datagram protocols such as UDP.</p>
+<p><a href="http://openjdk.java.net/jeps/219" target="_blank" rel="external">More about JEP 219</a><br><a name="javadoc"></a></p>
+<h3 id="13-HTML5-Javadoc"><a href="#13-HTML5-Javadoc" class="headerlink" title="13. HTML5 Javadoc"></a>13. HTML5 Javadoc</h3><p>Bringing Javadoc up to speed with the HTML standard: Generating modern HTML5 documentation.</p>
+<p><a href="http://openjdk.java.net/jeps/224" target="_blank" rel="external">More about JEP 224</a></p>
+<h2 id="Fixes-Cleanup"><a href="#Fixes-Cleanup" class="headerlink" title="Fixes / Cleanup:"></a><strong>Fixes / Cleanup:</strong></h2><p><a name="elideimport"></a></p>
+<h3 id="14-Elide-Deprecation-Warnings-on-Import-Statements"><a href="#14-Elide-Deprecation-Warnings-on-Import-Statements" class="headerlink" title="14. Elide Deprecation Warnings on Import Statements"></a>14. Elide Deprecation Warnings on Import Statements</h3><p><a href="http://openjdk.java.net/jeps/211" target="_blank" rel="external">More about JEP 211</a><br><a name="doclint"></a></p>
+<h3 id="15-Resolve-Lint-and-Doclint-Warnings"><a href="#15-Resolve-Lint-and-Doclint-Warnings" class="headerlink" title="15. Resolve Lint and Doclint Warnings"></a>15. Resolve Lint and Doclint Warnings</h3><p><a href="http://openjdk.java.net/jeps/212" target="_blank" rel="external">More about JEP 212</a><br><a name="millingcoin"></a></p>
+<h3 id="16-Milling-Project-Coin"><a href="#16-Milling-Project-Coin" class="headerlink" title="16. Milling Project Coin"></a>16. Milling Project Coin</h3><p><a href="http://openjdk.java.net/jeps/213" target="_blank" rel="external">More about JEP 213</a><br><a name="removegc"></a></p>
+<h3 id="17-Remove-GC-Combinations-Deprecated-in-JDK-8"><a href="#17-Remove-GC-Combinations-Deprecated-in-JDK-8" class="headerlink" title="17. Remove GC Combinations Deprecated in JDK 8"></a>17. Remove GC Combinations Deprecated in JDK 8</h3><p><a href="http://openjdk.java.net/jeps/214" target="_blank" rel="external">More about JEP 214</a><br><a name="processimport"></a></p>
+<h3 id="18-Process-Import-Statements-Correctly"><a href="#18-Process-Import-Statements-Correctly" class="headerlink" title="18. Process Import Statements Correctly"></a>18. Process Import Statements Correctly</h3><p><a href="http://openjdk.java.net/jeps/216" target="_blank" rel="external">More about JEP 216</a><br><a name="newfeatures"></a></p>
+<h2 id="19-Bonus-Where-do-new-features-come-from"><a href="#19-Bonus-Where-do-new-features-come-from" class="headerlink" title="19. Bonus: Where do new features come from?"></a>19. Bonus: Where do new features come from?</h2><p>JEPs and JSRs don’t usually pop out of nowhere, here’s the structure that holds it all together:</p>
+<p><strong>Groups</strong> – Individuals and organisations with a mutual interest around a broad subject or a specific body of code. Some examples are Security, Networking, Swing, and HotSpot.</p>
+<p><strong>Projects</strong> – Efforts to produce a body of code, documentation or other effort. Must be sponsored by at least one group. Recent examples are Project Lambda, Project Jigsaw, and Project Sumatra.</p>
+<p><strong>JDK Enhancement Proposal</strong> (<a href="http://openjdk.java.net/jeps/0" target="_blank" rel="external">JEP</a>) – Allows promoting a new specification informally before or in parallel to the JCP, when further exploration is needed. Accepted JEPs become a part of the JDK roadmap and assigned a version number.</p>
+<p><strong>Java Specification Request</strong> (<a href="https://jcp.org/en/jsr/all" target="_blank" rel="external">JSR</a>) – The actual specification of the feature happens in this stage, can be either coming through Groups/Projects, JEPs or from individual JCP (Java Community Process) members. An umbrella JSR is usually opened for each Java version, this has yet to happen with Java 9. Individual members of the community can also propose new Java specification requests.</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/Java/">Java</a> <a class="tag tag--primary tag--small t-link" href="/tags/Java-9/">Java 9</a> <a class="tag tag--primary tag--small t-link" href="/tags/新特性/">新特性</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/09/20/react-revocable-license/" data-tooltip="关于Facebook 的 React 专利许可证">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.rabears.com/2017/09/27/java-9-new-feature/">
+                    <i class="fa fa-facebook-official"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.rabears.com/2017/09/27/java-9-new-feature/">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=ra-59b794718357a377&amp;source=men-300&amp;lng=zh-cn&amp;s=wechat&amp;url=https://blog.rabears.com/2017/09/27/java-9-new-feature/">
+                    <i class="fa fa-weixin"></i>
+                </a>
+            </li>
+        
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+                <div id="gitment" >
+</div>
+<script type="text/javascript">
+    var gitment = new Gitment({
+                   id: 'https://blog.rabears.com/2017/09/27/java-9-new-feature/',
+                   owner: 'iamfoxuriel',
+                   repo: 'rabears.com',
+                   oauth: {
+                     client_id: '2a926eb0f402a8217178',
+                     client_secret: '315caf2d8f2db9a9340ee3858803faff2474b6f9',
+                   },
+                 })
+    if(!!gitment){
+        gitment.render('gitment');
+    }
+ </script>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2017 Jaden Zhuang. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/09/20/react-revocable-license/" data-tooltip="关于Facebook 的 React 专利许可证">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.rabears.com/2017/09/27/java-9-new-feature/">
+                    <i class="fa fa-facebook-official"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.rabears.com/2017/09/27/java-9-new-feature/">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=ra-59b794718357a377&amp;source=men-300&amp;lng=zh-cn&amp;s=wechat&amp;url=https://blog.rabears.com/2017/09/27/java-9-new-feature/">
+                    <i class="fa fa-weixin"></i>
+                </a>
+            </li>
+        
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <i id="btn-close-shareoptions" class="fa fa-close"></i>
+    <ul class="share-options">
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.rabears.com/2017/09/27/java-9-new-feature/">
+                    <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://blog.rabears.com/2017/09/27/java-9-new-feature/">
+                    <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=ra-59b794718357a377&amp;source=men-300&amp;lng=zh-cn&amp;s=wechat&amp;url=https://blog.rabears.com/2017/09/27/java-9-new-feature/">
+                    <i class="fa fa-weixin"></i><span>分享到 WeChat</span>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/profile.png" alt="作者的图片"/>
+        
+            <h4 id="about-card-name">Jaden Zhuang</h4>
+        
+            <div id="about-card-bio"><p>Developer <span class='amp'>&amp;</span> Dreamer <br/> Life’s a struggle <br/> 有多少夜痛苦烦恼着你无法入睡…</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Software Engineer</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Xiamen/China
+            </div>
+        
+    </div>
+</div>
+
+        <div id="algolia-search-modal" class="modal-container">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="close-button"><i class="fa fa-close"></i></span>
+            <i class="search-icon fa fa-search"></i>
+            <form id="algolia-search-form">
+                <input type="text" id="algolia-search-input" name="search"
+                    class="form-control input--large search-input" placeholder="Search "
+                    />
+            </form>
+        </div>
+        <div class="modal-body">
+            <div class="no-result text-color-light text-center">没有找到文章</div>
+            <div class="results">
+                
+                <div class="media">
+                    
+                    <div class="media-left">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2009/11/08/20th-anniversary-of-the-fall-of-the-berlin-wall/">
+                            <img class="media-image" src="https://blog.rabears.com/2009/11/08/20th-anniversary-of-the-fall-of-the-berlin-wall/BerlinerMauer.jpg" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2009/11/08/20th-anniversary-of-the-fall-of-the-berlin-wall/">
+                            <h3 class="media-heading">柏林墙倒20年</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2009年11月8日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>柏林墙是一个标志，也是一段记忆。</p>
+<p>1989年的11月9日，柏林墙在东、西德人民的欢呼声中倒塌。在柏林墙倒塌20年之后，那里的人们是否真正“跨跃”了那道墙？<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-left">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2010/04/28/unemployed-guys/">
+                            <img class="media-image" src="https://blog.rabears.com/2010/04/28/unemployed-guys/unemployeed.jpg" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2010/04/28/unemployed-guys/">
+                            <h3 class="media-heading">待业青年</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2010年4月28日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>在待业的这些日子里 看了红透网络的《待业青年》<br>简介是这样的：<br><blockquote class="pullquote"><p>这样的一群年轻人，他们才华横溢，他们生不逢时，他们崇尚艺术，他们叛逆，他们无助，他们被认为是社会的渣滓，而他们自命不凡，他们有情有义，他们 有时自甘堕落，他们有时愤世嫉俗，他们有时终日买醉，他们有时迷茫不已……</p>
+</blockquote><br>——谨以此片献给我们逝去的青春 特别是那些不喜欢上学的孩子<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2014/06/27/column-based-storage/">
+                            <h3 class="media-heading">列式存储(Column Based Storage)</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2014年6月27日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>目前大数据存储有两种方案可供选择：行存储和列存储。<br>业界对两种存储方案有很多争持，集中焦点是:谁能够更有效地处理海量数据，且兼顾安全、可靠、完整性。从目前发展情况看，关系数据库已经不适应这种巨大的存储量和计算要求，基本是淘汰出局。在已知的几种大数据处理软件中，Hadoop的HBase采用列存储，MongoDB是文档型的行存储，Lexst是二进制型的行存储。在这里，我不讨论这些软件的技术和优缺点，只围绕机械磁盘的物理特质，分析行存储和列存储的存储特点，以及由此产生的一些问题和解决办法。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2016/10/26/stephen-hawking/">
+                            <h3 class="media-heading">Stephen Hawking launches Centre for the Future of Intelligence</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年10月26日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><blockquote><p>Alongside the benefits, AI will also bring dangers, like powerful autonomous weapons, or new ways for the few to oppress the many.</p>
+<footer><strong>Stephen Hawking</strong><cite><a href="http://www.cam.ac.uk/research/news/the-best-or-worst-thing-to-happen-to-humanity-stephen-hawking-launches-centre-for-the-future-of" target="_blank" rel="external">www.cam.ac.uk</a></cite></footer></blockquote>
+<p>Artificial intelligence has the power to eradicate poverty and disease or hasten the end of human civilisation as we know it – according to a speech delivered by Professor Stephen Hawking this evening.</p>
+<blockquote class="pullquote right"><p>Alongside the benefits, AI will also bring dangers, like powerful autonomous weapons, or new ways for the few to oppress the many.</p>
+</blockquote>
+<p>“Success in creating AI could be the biggest event in the history of our civilisation,” said Professor Hawking. “But it could also be the last – unless we learn how to avoid the risks. Alongside the benefits, AI will also bring dangers like powerful autonomous weapons or new ways for the few to oppress the many.</p>
+<p>“We cannot predict what we might achieve when our own minds are amplified by AI. Perhaps with the tools of this new technological revolution, we will be able to undo some of the damage done to the natural world by the last one – industrialisation.”</p>
+<p>The Centre for the Future of Intelligence will initially focus on seven distinct projects in the first three-year phase of its work, reaching out to brilliant researchers and connecting them and their ideas to the challenges of making the best of AI. Among the initial research topics are: ‘Science, value and the future of intelligence’; ‘Policy and responsible innovation’; ‘Autonomous weapons – prospects for regulation’ and ‘Trust and transparency’.</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-left">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2017/09/20/react-revocable-license/">
+                            <img class="media-image" src="https://blog.rabears.com/2017/09/20/react-revocable-license/react-lawyer.png" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2017/09/20/react-revocable-license/">
+                            <h3 class="media-heading">关于Facebook 的 React 专利许可证</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年9月20日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>随着Apache、百度、Wordpress都在和Facebook的React.js以及其专利许可证划清界限，似乎大家又在讨论Facebook的这个BSD+PATENT的许可证问题了。这让我想起了之前在Medium读过的一篇文章——《<a href="https://medium.com/@dwalsh.sdlr/react-facebook-and-the-revokable-patent-license-why-its-a-paper-25c40c50b562" target="_blank" rel="external">React, Facebook, and the Revocable Patent License, Why It’s a Paper</a>》，我觉得那篇文章写的不错，而且还是一个会编程的律师写的，所以有必要把这篇文章传播到中文社区这边来。注意，我不会全部翻译，我只是用我的语言来负责搬运内容和观点，我只想通过这篇文章让大家了解一下这个世界以及专利相关的知识，这样可以避免你看到某乎的“怎么看待XXX”这类的问题时人云亦云，能有自己的独立思考和自我判断。;-)<br><a href="https://github.com/facebook/react/blob/master/PATENTS" target="_blank" rel="external">React Additional Grant of Patent Rights Version 2</a><br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-left">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2017/09/27/java-9-new-feature/">
+                            <img class="media-image" src="https://blog.rabears.com/2017/09/27/java-9-new-feature/openjdk.png" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2017/09/27/java-9-new-feature/">
+                            <h3 class="media-heading">Java 9 – The Ultimate Feature List</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年9月27日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><blockquote><footer><strong>Java 9 的发布在历经多次跳票之后，终于正式发布。从这个版本开始，Java 将每半年发布一个版本。 本文翻译自Java 9 Ultimate Feature List, 让我们看看这次发布我们将拥有哪些高级特性。</strong><cite><a href="http://openjdk.java.net/projects/jdk9/" target="_blank" rel="external">openjdk.java.net</a></cite></footer></blockquote></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p class="results-count text-medium"
+                data-message-zero="没有找到文章"
+                data-message-one="找到 1 篇文章"
+                data-message-other="找到 {n} 篇文章">
+                找到 6 篇文章
+            </p>
+        </div>
+    </div>
+</div>
+
+        
+
+
+<div id="cover"></div>
+
+
+        <!--SCRIPTS-->
+<script src="/assets/js/script.js"></script>
+<!--SCRIPTS END-->
+
+    
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>
+    <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <script>
+        var algoliaClient = algoliasearch('V7X4W5V99K', '56ea9c94b8a2a0f51e18e78c97bce433');
+        var algoliaIndex = algoliaClient.initIndex('blog_index');
+    </script>
+
+    </body>
+</html>
