@@ -24,7 +24,7 @@
 <meta property="og:description" content="我们的CPU没有变得更快，但是我们现在的CPU拥有多个内核。 如果我们想要利用我们现在可用的所有这些硬件，我们需要一种并发运行代码的方法。 几十年的难以追踪的错误和开发者的沮丧表明，threads不是要走的路。 但是不要害怕，那里有很好的选择，今天向你展示其中之一：Actor 模型。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="https://blog.rabears.com/2015/07/01/actor-model/actors.png">
-<meta property="og:updated_time" content="2017-11-02T06:53:56.474Z">
+<meta property="og:updated_time" content="2017-11-02T08:49:29.831Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Actor 模型">
 <meta name="twitter:description" content="我们的CPU没有变得更快，但是我们现在的CPU拥有多个内核。 如果我们想要利用我们现在可用的所有这些硬件，我们需要一种并发运行代码的方法。 几十年的难以追踪的错误和开发者的沮丧表明，threads不是要走的路。 但是不要害怕，那里有很好的选择，今天向你展示其中之一：Actor 模型。">
@@ -263,7 +263,7 @@
 <h3 id="Actor模型"><a href="#Actor模型" class="headerlink" title="Actor模型"></a>Actor模型</h3><p>Actor模型是处理并发计算的概念模型。 它定义了一些关于系统组件如何表现和相互交互的一般规则。 使用这种模式的最有名的语言可能是<code>Erlang</code>。 我们将尝试更多地关注模型本身，而不是在不同的语言或库中实现它。</p>
 <h3 id="Actor概念"><a href="#Actor概念" class="headerlink" title="Actor概念"></a>Actor概念</h3><p>Actor是原始的计算单位。 这是接收消息的 <em>载体</em>，并且会基于消息进行某种计算。</p>
 <p>这个概念与我们在面向对象语言中是非常相似的：一个对象接收一个消息（一个方法调用），并根据接收到的消息做什么（我们调用哪个方法）。<br>主要区别是Actor彼此之间完全隔离(isolated)，永远不会共享内存。 还值得一提的是，一个Actor可以保持一个永远不能被另一个Actor直接改变的私有状态。</p>
-<h5 id="Actors是成体系存在的"><a href="#Actors是成体系存在的" class="headerlink" title="Actors是成体系存在的"></a>Actors是成体系存在的</h5><p><code>And one actor is no actor</code>正如<code>One ant is no ant</code>。<br>他们是一个完整的系统。 在Actor模型中，一切都是Actor，他们需要有指向（addresses），这样以来一个Actor可以发送一个消息给另一个Actor。</p>
+<h5 id="Actors是成体系存在的"><a href="#Actors是成体系存在的" class="headerlink" title="Actors是成体系存在的"></a>Actors是成体系存在的</h5><p><code>One actor is no actor</code>正如<code>One ant is no ant</code>。<br>他们是一个完整的系统。 在Actor模型中，一切都是Actor，他们需要有指向（addresses），这样以来一个Actor可以发送一个消息给另一个Actor。</p>
 <h5 id="Actors-have-mailboxes"><a href="#Actors-have-mailboxes" class="headerlink" title="Actors have mailboxes"></a>Actors have mailboxes</h5><p>我们可以假设每个Actor都有一个自己的邮箱。<br>虽然多个Actor可以同时运行， 但是对于单个Actor是按顺序处理给定的消息， 这对我们理解至关重要。</p>
 <p>消息是通过异步发方式被发送到Actor的， ，当处理另一个消息时，需要将它们存储在某处。 邮箱是存储这些邮件的地方。</p>
 <img src="/2015/07/01/actor-model/actors.png" alt="actors.png" title="">
