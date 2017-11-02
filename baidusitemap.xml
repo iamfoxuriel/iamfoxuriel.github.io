@@ -4,18 +4,176 @@
 
     
   <url>
+    <loc>https://blog.rabears.com/2017/11/01/unabomber/</loc>
+    <lastmod>2017-11-02T06:54:48.871Z</lastmod>
+    <data>
+        <display>
+        <title>论工业社会及其未来</title>
+        <pubTime>2017-11-01T09:03:11.000Z</pubTime>
+        
+        <tag>Unabomber</tag>
+         
+        <tag>大学炸弹客</tag>
+         
+        <tag>论工业社会及其未来</tag>
+         
+         
+           
+             
+              <breadCrumb title="Caprices" url="https://blog.rabears.com/categories/Caprices/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://blog.rabears.com/2015/07/01/actor-model/</loc>
+    <lastmod>2017-11-02T06:53:56.474Z</lastmod>
+    <data>
+        <display>
+        <title>Actor 模型</title>
+        <pubTime>2015-07-01T09:04:07.000Z</pubTime>
+        
+        <tag>Actor</tag>
+         
+        <tag>并发模型</tag>
+         
+         
+           
+             
+              <breadCrumb title="Tech" url="https://blog.rabears.com/categories/Tech/"/>
+          
+             
+              <breadCrumb title="Actor" url="https://blog.rabears.com/categories/Tech/Actor/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://blog.rabears.com/2017/06/03/smbo/</loc>
+    <lastmod>2017-11-01T09:16:43.323Z</lastmod>
+    <data>
+        <display>
+        <title>SMBO - a ReactJs based framework</title>
+        <pubTime>2017-06-03T14:12:48.000Z</pubTime>
+        
+        <tag>ReactJS</tag>
+         
+         
+           
+             
+              <breadCrumb title="Tech" url="https://blog.rabears.com/categories/Tech/"/>
+          
+             
+              <breadCrumb title="OpenSource" url="https://blog.rabears.com/categories/Tech/OpenSource/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://blog.rabears.com/2011/09/07/punch-on-25/</loc>
+    <lastmod>2017-11-01T09:16:43.316Z</lastmod>
+    <data>
+        <display>
+        <title>25岁的捶</title>
+        <pubTime>2011-09-07T13:26:25.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Caprices" url="https://blog.rabears.com/categories/Caprices/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://blog.rabears.com/2016/11/26/my-uncle-not-exist/</loc>
+    <lastmod>2017-11-01T09:16:43.311Z</lastmod>
+    <data>
+        <display>
+        <title>我的舅舅</title>
+        <pubTime>2016-11-26T11:22:18.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Caprices" url="https://blog.rabears.com/categories/Caprices/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://blog.rabears.com/2015/11/10/java-8-stream/</loc>
+    <lastmod>2017-11-01T09:16:43.275Z</lastmod>
+    <data>
+        <display>
+        <title>Java 8 Stream</title>
+        <pubTime>2015-11-10T10:59:05.000Z</pubTime>
+        
+        <tag>Java 8</tag>
+         
+        <tag>Stream</tag>
+         
+        <tag>Java</tag>
+         
+         
+           
+             
+              <breadCrumb title="Tech" url="https://blog.rabears.com/categories/Tech/"/>
+          
+             
+              <breadCrumb title="Java" url="https://blog.rabears.com/categories/Tech/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://blog.rabears.com/2015/09/25/intro-to-prolog/</loc>
+    <lastmod>2017-11-01T09:16:43.269Z</lastmod>
+    <data>
+        <display>
+        <title>Prolog初窥</title>
+        <pubTime>2015-09-25T05:29:33.000Z</pubTime>
+        
+        <tag>Prolog</tag>
+         
+         
+           
+             
+              <breadCrumb title="Tech" url="https://blog.rabears.com/categories/Tech/"/>
+          
+             
+              <breadCrumb title="Prolog" url="https://blog.rabears.com/categories/Tech/Prolog/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://blog.rabears.com/2017/09/27/java-9-new-feature/</loc>
-    <lastmod>2017-09-29T03:20:38.024Z</lastmod>
+    <lastmod>2017-10-26T07:11:57.597Z</lastmod>
     <data>
         <display>
         <title>Java 9 – The Ultimate Feature List</title>
         <pubTime>2017-09-27T11:42:01.000Z</pubTime>
         
+        <tag>Java</tag>
+         
         <tag>Java 9</tag>
          
         <tag>新特性</tag>
-         
-        <tag>Java</tag>
          
          
            
@@ -24,6 +182,29 @@
           
              
               <breadCrumb title="Java" url="https://blog.rabears.com/categories/Translation/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://blog.rabears.com/2016/03/22/intro-to-reactive-extension/</loc>
+    <lastmod>2017-10-26T02:49:07.981Z</lastmod>
+    <data>
+        <display>
+        <title>ReactiveX</title>
+        <pubTime>2016-03-22T10:33:46.000Z</pubTime>
+        
+        <tag>ReactiveX</tag>
+         
+         
+           
+             
+              <breadCrumb title="Tech" url="https://blog.rabears.com/categories/Tech/"/>
+          
+             
+              <breadCrumb title="ReactiveX" url="https://blog.rabears.com/categories/Tech/ReactiveX/"/>
           
         </display>
     </data>

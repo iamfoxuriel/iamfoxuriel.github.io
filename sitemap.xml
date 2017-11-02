@@ -2,9 +2,65 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.rabears.com/2017/11/01/unabomber/</loc>
+    
+    <lastmod>2017-11-02T06:54:48.871Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.rabears.com/2015/07/01/actor-model/</loc>
+    
+    <lastmod>2017-11-02T06:53:56.474Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.rabears.com/2017/06/03/smbo/</loc>
+    
+    <lastmod>2017-11-01T09:16:43.323Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.rabears.com/2011/09/07/punch-on-25/</loc>
+    
+    <lastmod>2017-11-01T09:16:43.316Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.rabears.com/2016/11/26/my-uncle-not-exist/</loc>
+    
+    <lastmod>2017-11-01T09:16:43.311Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.rabears.com/2015/11/10/java-8-stream/</loc>
+    
+    <lastmod>2017-11-01T09:16:43.275Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.rabears.com/2015/09/25/intro-to-prolog/</loc>
+    
+    <lastmod>2017-11-01T09:16:43.269Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.rabears.com/2017/09/27/java-9-new-feature/</loc>
     
-    <lastmod>2017-09-29T03:20:38.024Z</lastmod>
+    <lastmod>2017-10-26T07:11:57.597Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.rabears.com/2016/03/22/intro-to-reactive-extension/</loc>
+    
+    <lastmod>2017-10-26T02:49:07.981Z</lastmod>
     
   </url>
   

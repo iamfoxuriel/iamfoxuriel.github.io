@@ -1,0 +1,977 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Rabear&#39;s">
+    <title>Java 8 Stream - Rabear&#39;s</title>
+    <meta name="author" content="Jaden Zhuang">
+    
+    
+        <link rel="icon" href="https://blog.rabears.com/assets/images/favicon.ico">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="Java 8 中的 Stream 是对集合（Collection）对象功能的增强，它专注于对集合对象进行各种非常便利、高效的聚合操作（aggregate operation），或者大批量数据操作 (bulk data operation)。Stream API 借助于同样新出现的 Lambda 表达式，极大的提高编程效率和程序可读性">
+<meta name="keywords" content="Java 8,Stream,Java">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Java 8 Stream">
+<meta property="og:url" content="https://blog.rabears.com/2015/11/10/java-8-stream/index.html">
+<meta property="og:site_name" content="Rabear&#39;s">
+<meta property="og:description" content="Java 8 中的 Stream 是对集合（Collection）对象功能的增强，它专注于对集合对象进行各种非常便利、高效的聚合操作（aggregate operation），或者大批量数据操作 (bulk data operation)。Stream API 借助于同样新出现的 Lambda 表达式，极大的提高编程效率和程序可读性">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://blog.rabears.com/2015/11/10/java-8-stream/ProductRepository.png">
+<meta property="og:image" content="https://blog.rabears.com/2015/11/10/java-8-stream/ProductSpec.png">
+<meta property="og:image" content="https://blog.rabears.com/2015/11/10/java-8-stream/CompositeSpec.png">
+<meta property="og:image" content="https://blog.rabears.com/2015/11/10/java-8-stream/NotSpec.png">
+<meta property="og:updated_time" content="2017-11-01T09:16:43.275Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java 8 Stream">
+<meta name="twitter:description" content="Java 8 中的 Stream 是对集合（Collection）对象功能的增强，它专注于对集合对象进行各种非常便利、高效的聚合操作（aggregate operation），或者大批量数据操作 (bulk data operation)。Stream API 借助于同样新出现的 Lambda 表达式，极大的提高编程效率和程序可读性">
+<meta name="twitter:image" content="https://blog.rabears.com/2015/11/10/java-8-stream/ProductRepository.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://blog.rabears.com/assets/images/profile.png"/>
+    
+    
+    
+    
+    
+        <script src="/assets/js/gitment.browser.js"></script>
+        <link rel="stylesheet" href="/assets/css/gitment.css">
+    
+    <!--STYLES-->
+    <!--STYLES END-->
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-sxklfps8ywgfyyjcowvnb4gxdgt0zjts3hsguljmv9uqanxjbnitrovtbrek.min.css">
+    <!--STYLES END-->
+    
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="5">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">Rabear&#39;s</a>
+    </div>
+    
+        
+            <a  class="header-right-icon open-algolia-search"
+                href="#search">
+        
+        
+            <i class="fa fa-lg fa-search"></i>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="5">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.png" alt="作者的图片"/>
+                </a>
+                <h4 class="sidebar-profile-name">Jaden Zhuang</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Developer <span class='amp'>&amp;</span> Dreamer <br/> Life’s a struggle <br/> 有多少夜痛苦烦恼着你无法入睡…</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/ "
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-categories"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-tags"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-archives"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link open-algolia-search"
+                             href="#search"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="#about"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="https://github.com/iamfoxuriel" target="_blank" rel="noopener">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="http://www.linkedin.com/in/jadenzhuang/" target="_blank" rel="noopener">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="mailto:iamfoxuriel@gmail.com" target="_blank" rel="noopener">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                        <span class="sidebar-button-desc">邮箱</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/atom.xml"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="5"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Java 8 Stream
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time itemprop="datePublished" datetime="2015-11-10T18:59:05+08:00">
+	
+		    11月 10, 2015
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/Tech/">Tech</a>, <a class="category-link" href="/categories/Tech/Java/">Java</a>
+
+
+    
+</div>
+
+    
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <blockquote>
+<p>Java 8 中的 Stream 是对集合（Collection）对象功能的增强，它专注于对集合对象进行各种非常便利、高效的聚合操作（aggregate operation），或者大批量数据操作 (bulk data operation)。Stream API 借助于同样新出现的 Lambda 表达式，极大的提高编程效率和程序可读性<br><a id="more"></a></p>
+</blockquote>
+<h1 id="Write-Lean-Programs"><a href="#Write-Lean-Programs" class="headerlink" title="Write Lean Programs"></a>Write Lean Programs</h1><blockquote>
+<p>OO makes code understandable by encapsulating moving parting, but FP makes code understandable by minimizing moving parts. －Michael Feathers</p>
+</blockquote>
+<h2 id="Product-Repository"><a href="#Product-Repository" class="headerlink" title="Product Repository"></a>Product Repository</h2><img src="/2015/11/10/java-8-stream/ProductRepository.png" alt="ProductRepository.png" title="">
+<h3 id="First-Attempt-The-Worst-Implement"><a href="#First-Attempt-The-Worst-Implement" class="headerlink" title="First Attempt: The Worst Implement"></a>First Attempt: The Worst Implement</h3><p><strong><em>需求1</em></strong>：在仓库中查找所有颜色为<strong>红色</strong>的产品</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> ArrayList <span class="title">findAllRedProducts</span><span class="params">(ArrayList repo)</span> </span>&#123;</div><div class="line">  ArrayList result = <span class="keyword">new</span> ArrayList();</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;repo.size(); i++) &#123;</div><div class="line">    Product product = (Product)repo[i];</div><div class="line">    <span class="keyword">if</span> (product.getColor() == Color.RED) &#123;</div><div class="line">	   result.add(product);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>指令式(Imperative)</li>
+<li>缺乏编译时类型安全性检查</li>
+<li>实现类型</li>
+<li>硬编码</li>
+<li>重复设计</li>
+</ul>
+<h3 id="Second-Attempt-Using-for-each"><a href="#Second-Attempt-Using-for-each" class="headerlink" title="Second Attempt: Using for-each"></a>Second Attempt: Using <code>for-each</code></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> List&lt;Product&gt; <span class="title">findAllRedProducts</span><span class="params">(List&lt;Product&gt; repo)</span> </span>&#123;</div><div class="line">  List&lt;Product&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">  <span class="keyword">for</span> (Product p : repo) &#123;</div><div class="line">    <span class="keyword">if</span> (p.getColor() == Color.RED) &#123;</div><div class="line">	  result.add(p);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Third-Attempt-Parameterizing"><a href="#Third-Attempt-Parameterizing" class="headerlink" title="Third Attempt: Parameterizing"></a>Third Attempt: Parameterizing</h3><p><strong><em>需求2</em></strong>：在仓库中查找所有颜色为<strong>绿色</strong>的产品</p>
+<p><code>Copy-Paste</code>是大部分程序员最容易犯的毛病，为此引入了大量的重复代码。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> List&lt;Product&gt; <span class="title">findAllGreenProducts</span><span class="params">(List&lt;Product&gt; repo)</span> </span>&#123;</div><div class="line">  List&lt;Product&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">  <span class="keyword">for</span> (Product p : repo) &#123;</div><div class="line">    <span class="keyword">if</span> (p.getColor() == Color.GREEN) &#123;</div><div class="line">	  result.add(p);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>为了消灭<code>Hard Code</code>和重复代码，得到可重用的代码，可以引入简单的<strong>参数化</strong>设计。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> List&lt;Product&gt; <span class="title">findProductsByColor</span><span class="params">(List&lt;Product&gt; repo, Color color)</span> </span>&#123;</div><div class="line">  List&lt;Product&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">  <span class="keyword">for</span> (Product p : repo) &#123;</div><div class="line">    <span class="keyword">if</span> (p.getColor() == color) &#123;</div><div class="line">	  result.add(p);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Forth-Attempt-Parameterizing-with-Every-Attribute-You-Can-Think-Of"><a href="#Forth-Attempt-Parameterizing-with-Every-Attribute-You-Can-Think-Of" class="headerlink" title="Forth Attempt: Parameterizing with Every Attribute You Can Think Of"></a>Forth Attempt: Parameterizing with Every Attribute You Can Think Of</h3><p><strong><em>需求3</em></strong>：查找所有<strong>重量小于10</strong>的所有产品</p>
+<p>大部分程序员依然会使用<code>Copy-Paste</code>解决这个问题，拒绝<code>Copy-Paste</code>的陋习，最具实效的一个办法就是把<code>Copy-Paste</code>的快捷键失效，当每次尝试<code>Copy-Paste</code>时提醒自己做更好的设计。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> List&lt;Product&gt; <span class="title">findProductsBelowWeight</span><span class="params">(List&lt;Product&gt; repo, <span class="keyword">int</span> weight)</span> </span>&#123;</div><div class="line">  List&lt;Product&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">  <span class="keyword">for</span> (Product p : repo) &#123;</div><div class="line">    <span class="keyword">if</span> (p.getWeight() &lt; weight) &#123;</div><div class="line">	  result.add(p);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>为了消除两者重复的代码，通过简单的<strong>参数化</strong>往往不能完美解决这类问题，相反会引入额外的复杂度。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> List&lt;Product&gt; <span class="title">findProducts</span><span class="params">(List&lt;Product&gt; repo, Color color, <span class="keyword">int</span> weight, <span class="keyword">boolean</span> flag)</span> </span>&#123;</div><div class="line">  List&lt;Product&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">  <span class="keyword">for</span> (Product p : repo) &#123;</div><div class="line">    <span class="keyword">if</span> ((flag &amp;&amp; p.getColor() == color) ||</div><div class="line">	   (!flag &amp;&amp; p.getWeight() &lt; weight)) &#123;</div><div class="line">	  result.add(p);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>日常工作中这样的实现手法非常普遍，函数的参数列表随着需求增加不断增加，函数逻辑承担的职责越来越多，逻辑也变得越来越难以控制。</p>
+<h3 id="Firth-Attempt-Abstracting-over-Criteria"><a href="#Firth-Attempt-Abstracting-over-Criteria" class="headerlink" title="Firth Attempt: Abstracting over Criteria"></a>Firth Attempt: Abstracting over Criteria</h3><p>为此需要抽取出隐藏的概念，使其遍历的算法与查找的标准能够独立地变化，将<strong>行为参数化</strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ProductSpec</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product product)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>此刻<code>findProducts</code>的算法逻辑得到封闭。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> List&lt;Product&gt; <span class="title">findProducts</span><span class="params">(List&lt;Product&gt; repo, ProductSpec spec)</span> </span>&#123;</div><div class="line">  List&lt;Product&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">  <span class="keyword">for</span> (Product p : repo) &#123;</div><div class="line">    <span class="keyword">if</span> (spec.satisfy(p)) &#123;</div><div class="line">	  result.add(p);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过可复用的<code>Functor</code>来封装各种变化，让变化的因素控制在最小的范围内。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ColorSpec</span> <span class="keyword">implements</span> <span class="title">ProductSpec</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> Color color;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">ColorSpec</span><span class="params">(Color color)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.color = color;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product product)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> product.getColor() == color;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BelowWeightSpec</span> <span class="keyword">implements</span> <span class="title">ProductSpec</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> <span class="keyword">int</span> limit;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">BelowWeightSpec</span><span class="params">(<span class="keyword">int</span> limit)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.limit = limit;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product product)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> product.getWeight() &lt; limit;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>用户的接口也变得简单多了，而且富有表现力。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List&lt;Product&gt; products = findProducts(repo, <span class="keyword">new</span> ColorSpec(RED));</div></pre></td></tr></table></figure>
+<img src="/2015/11/10/java-8-stream/ProductSpec.png" alt="ProductSpec.png" title="">
+<p>这是经典的<code>OO</code>设计，如果熟悉设计模式的读者对此已经习以为常了。设计模式是好东西，但常常被人依葫芦画瓢，死板照抄，甚至被滥用。事实上，引入或去除设计模式是一个很<strong>自然</strong>的过程。与大师们交流，问究此处为何引入设计模式，得到的答案：直觉。忘记所有设计模式吧，管它是不是模式，如果设计是简单的，它这就是模式。</p>
+<p>至此，代码另外还有一个明显的坏味道，<code>ColorSpec</code>和<code>BelowWeightSpec</code>都需要继承<code>ProductSpec</code>，都需要定义一个构造函数和一个私有的字段，并重写<code>satisfy</code>方法，这是一种典型的重复现象：<strong>重复型结构</strong>。</p>
+<p>因<code>Java</code>缺乏闭包的支持，程序员不得不承受这样的烦恼，但此刻暂时不关心，继续前进。</p>
+<h3 id="Sixth-Attempt-Composite-Criteria"><a href="#Sixth-Attempt-Composite-Criteria" class="headerlink" title="Sixth Attempt: Composite Criteria"></a>Sixth Attempt: Composite Criteria</h3><p><strong><em>需求4</em></strong>：查找所有<strong>颜色为红色或者绿色</strong>，并且<strong>重量小于10</strong>的产品</p>
+<p>按照既有的代码结构，往往易于设计出类似<code>ColorAndBelowWeightSpec</code>的实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ColorAndBelowWeightSpec</span> <span class="keyword">implements</span> <span class="title">ProductSpec</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> Color color1;</div><div class="line">  <span class="keyword">private</span> Color color2;</div><div class="line">  <span class="keyword">private</span> <span class="keyword">int</span> limit;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">ColorAndBelowWeightSpec</span><span class="params">(Color color1, Color color2， <span class="keyword">int</span> limit)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.color1 = color1;</div><div class="line">    <span class="keyword">this</span>.color2 = color2;</div><div class="line">    <span class="keyword">this</span>.limit = limit;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product p)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> (p.getColor() == color1 || p.getColor() == color2) </div><div class="line">        &amp;&amp; (p.getWeight() &lt; limit);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>存在两个明显的坏味道：</p>
+<ul>
+<li>类名中包含<code>And</code>往往是违背单一职责的信号灯</li>
+<li><code>ColorAndBelowWeightSpec</code>的实现与<code>ColorSpec</code>，<code>BelowWeightSpec</code>之间存在明显的重复</li>
+</ul>
+<p>此刻，需要寻找更本质的抽象来表达设计，引入<code>and/or</code>的语义模型。</p>
+<ul>
+<li>Composite Spec: AndSpec, OrSpec</li>
+<li>Atomic Spec：ColorSpec, BeblowWeightSpec</li>
+</ul>
+<img src="/2015/11/10/java-8-stream/CompositeSpec.png" alt="CompositeSpec.png" title="">
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">publc <span class="class"><span class="keyword">class</span> <span class="title">AndSpec</span> <span class="keyword">implements</span> <span class="title">ProductSpec</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> List&lt;ProductSpec&gt; specs = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">AndSpec</span><span class="params">(ProductSpec... specs)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.specs.addAll(Arrays.asList(specs));</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product p)</span> </span>&#123;</div><div class="line">    <span class="keyword">for</span> (ProductSpec spec : specs) &#123;</div><div class="line">	  <span class="keyword">if</span> (!spec.satisfy(p))</div><div class="line">	    <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">publc <span class="class"><span class="keyword">class</span> <span class="title">OrSpec</span> <span class="keyword">implements</span> <span class="title">ProductSpec</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> List&lt;ProductSpec&gt; specs = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">OrSpec</span><span class="params">(ProductSpec... specs)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.specs.addAll(Arrays.asList(specs));</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product p)</span> </span>&#123;</div><div class="line">    <span class="keyword">for</span> (ProductSpec spec : specs) &#123;</div><div class="line">	  <span class="keyword">if</span> (spec.satisfy(p))</div><div class="line">	    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以通过<code>AndSpec</code>组合<code>ColorSpec, BelowWeightSpec</code>来实现需求，简单漂亮，并且富有表达力。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">List&lt;Product&gt; products = findProducts(repo, <span class="keyword">new</span> AndSpec(</div><div class="line">  <span class="keyword">new</span> OrSpec(<span class="keyword">new</span> ColorSpec(RED), <span class="keyword">new</span> ColorSpec(Greeen)), <span class="keyword">new</span> BelowWeightSpec(<span class="number">10</span>));</div></pre></td></tr></table></figure>
+<p>此时设计存在两个严重的坏味道：</p>
+<ul>
+<li><code>AndSpec</code>与<code>OrSpec</code>存在明显的代码重复</li>
+<li>大堆的<code>new</code>让人眼花缭乱</li>
+</ul>
+<h3 id="Seventh-Attempt-Extract-Parent"><a href="#Seventh-Attempt-Extract-Parent" class="headerlink" title="Seventh Attempt: Extract Parent"></a>Seventh Attempt: Extract Parent</h3><p>先尝试消除<code>AndSpec</code>与<code>OrSpec</code>存在的代码重复，<code>OO</code>设计的第一个直觉就是通过抽取基类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CombinableSpec</span> <span class="keyword">implements</span> <span class="title">ProductSpec</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> List&lt;ProductSpec&gt; specs = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">  <span class="keyword">private</span> <span class="keyword">boolean</span> shortcut;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="title">CombinableSpec</span><span class="params">(List&lt;ProductSpec&gt; specs, <span class="keyword">boolean</span> shortcut)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.specs.addAll(specs);</div><div class="line">	<span class="keyword">this</span>.shortcut = shortcut;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product p)</span> </span>&#123;</div><div class="line">    <span class="keyword">for</span> (ProductSpec spec : specs) &#123;</div><div class="line">	  <span class="keyword">if</span> (spec.satisfy(p) == shortcut)</div><div class="line">	    <span class="keyword">return</span> shortcut;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> !shortcut;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过<strong>参数化</strong>配置，复用<code>CombinableSpec</code>的实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">publc <span class="class"><span class="keyword">class</span> <span class="title">AndSpec</span> <span class="keyword">extends</span> <span class="title">CombinableSpec</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">AndSpec</span><span class="params">(ProductSpec... specs)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>(Arrays.asList(specs), <span class="keyword">false</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">publc <span class="class"><span class="keyword">class</span> <span class="title">OrSpec</span> <span class="keyword">extends</span> <span class="title">CombinableSpec</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">OrSpec</span><span class="params">(ProductSpec... specs)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>(Arrays.asList(specs), <span class="keyword">true</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如何评判<code>boolean</code>接口的使用呢？在不损伤可理解性的前提下，为了消除重复的设计是值得推荐的。<code>boolean</code>接口的可理解性关键依赖于调用点与函数接口之间的距离，如果在同一个文件，同一个类，并能在一个页面显示的，是完全可以接受的。</p>
+<h3 id="Eighth-Attempt-Decorate-Criteria"><a href="#Eighth-Attempt-Decorate-Criteria" class="headerlink" title="Eighth Attempt: Decorate Criteria"></a>Eighth Attempt: Decorate Criteria</h3><p><strong><em>需求5</em></strong>：查找所有<strong>颜色为不是红色</strong>的产品</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">publc <span class="class"><span class="keyword">class</span> <span class="title">NotSpec</span> <span class="keyword">implements</span> <span class="title">ProductSpec</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> ProductSpec spec;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">NotSpec</span><span class="params">(ProductSpec spec)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.spec = spec;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product p)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> !spec.satisfy(p);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>NotSpec</code>是一种修饰了的<code>ProductSpec</code>，同时也使得用户的接口也变得更加人性化了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List&lt;Product&gt; products = findProducts(repo, <span class="keyword">new</span> NotSpec(<span class="keyword">new</span> ColorSpec(RED)));</div></pre></td></tr></table></figure>
+<img src="/2015/11/10/java-8-stream/NotSpec.png" alt="NotSpec.png" title="">
+<h3 id="Ninth-Attempt-Using-Static-Factory-to-DSL"><a href="#Ninth-Attempt-Using-Static-Factory-to-DSL" class="headerlink" title="Ninth Attempt: Using Static Factory to DSL"></a>Ninth Attempt: Using Static Factory to DSL</h3><p>之前遗留了一个问题，一大堆眼花缭乱的<code>new</code>使得代码失去了部分的可读性。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">List&lt;Product&gt; products = findProducts(repo, <span class="keyword">new</span> AndSpec(</div><div class="line">  <span class="keyword">new</span> OrSpec(<span class="keyword">new</span> ColorSpec(RED), <span class="keyword">new</span> ColorSpec(Greeen)), <span class="keyword">new</span> BelowWeightSpec(<span class="number">10</span>));</div></pre></td></tr></table></figure>
+<p>可以引入<code>DSL</code>改善程序的可读性，让代码更具表达力。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List&lt;Product&gt; products = findProducts(repo, and(or(color(RED), color(GREEN)), belowWeight(<span class="number">10</span>)));</div></pre></td></tr></table></figure>
+<p>上述的DSL可以使用<code>static factory</code>的设计手段简单实现。按照惯例，可以建立类似于<code>ProductSpecs</code>的工具类，将这些工厂方法搬迁到工具类中去。</p>
+<p>接口与对应工具类的对称性设计在<code>Java</code>社区中应用非常广泛，例如标准库中的<code>java.util.Collection/java.util.Collections</code>的设计。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ProductSpec</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product p)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductSpecs</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ProductSpec <span class="title">color</span><span class="params">(<span class="keyword">final</span> Color color)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ProductSpec() &#123;</div><div class="line">      <span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product p)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> p.getColor() == color;</div><div class="line">      &#125;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ProductSpec <span class="title">belowWeight</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> limit)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ProductSpec() &#123;</div><div class="line">      <span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product p)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> p.getWeight() &lt; limit;</div><div class="line">      &#125;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ProductSpec <span class="title">and</span><span class="params">(ProductSpec... specs)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> CombinableSpec(Arrays.asList(specs), <span class="keyword">false</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ProductSpec <span class="title">or</span><span class="params">(ProductSpec... specs)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> CombinableSpec(Arrays.asList(specs), <span class="keyword">true</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ProductSpec <span class="title">not</span><span class="params">(<span class="keyword">final</span> ProductSpec spec)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ProductSpec() &#123;</div><div class="line">      <span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product p)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> !spec.satisfy(p);</div><div class="line">      &#125;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="title">ProductSpecs</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> AssertionError(<span class="string">"no instances"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>此外，使用匿名内部类，可以得到意外的惊喜。通过有限地引入闭包的概念，从而避免了类似<strong>Firth Attempt/Sixth Attempt</strong>的设计中引入多余的构造函数和成员变量的复杂度，从而消除了部分的<strong>结构性重复</strong>的坏味道。</p>
+<p>当然，要让这些<code>static factory</code>可见，需要<code>import static</code>导入这些方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> practical.programming.overview.ProductSpec.*;</div><div class="line"></div><div class="line">List&lt;Product&gt; products = findProducts(repo, not(and(color(RED), belowWeight(<span class="number">10</span>)));</div></pre></td></tr></table></figure>
+<h3 id="Tenth-Attempt-Moving-Static-Factory-into-Interface"><a href="#Tenth-Attempt-Moving-Static-Factory-into-Interface" class="headerlink" title="Tenth Attempt: Moving Static Factory into Interface"></a>Tenth Attempt: Moving Static Factory into Interface</h3><p>使用<code>Java8</code>可以将这些工厂方法直接搬迁到<code>ProductSpec</code>的接口中去，这样做至少得到两个好处。</p>
+<ul>
+<li>可以删除<code>ProductSpecs</code>的工具类</li>
+<li>使的接口和静态方法(尤其静态工厂方法)关系更加紧密</li>
+</ul>
+<p><code>Java8</code>并没有因为<code>comparing</code>等静态工厂方法的增强而建立<code>Comparators</code>的工具类，而是直接将它们集成在<code>Comparator</code>的接口中，这是自<code>Java8</code>之后思维的一个新的转变（<code>Comparator.comparing</code>的实现留作作业巩固今天所学知识）。</p>
+<p>对于本例，可以将<code>ProductSpecs</code>删除，将所有静态工厂方法搬迁到<code>ProductSpec</code>中去。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ProductSpec</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product p)</span></span>;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">static</span> ProductSpec <span class="title">color</span><span class="params">(Color color)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ProductSpec() &#123;</div><div class="line">	  <span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product p)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> p.getColor() == color;</div><div class="line">      &#125;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">static</span> ProductSpec <span class="title">belowWeight</span><span class="params">(<span class="keyword">int</span> limit)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ProductSpec() &#123;</div><div class="line">	  <span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product p)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> p.getWeight() &lt; limit;</div><div class="line">      &#125;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">static</span> ProductSpec <span class="title">and</span><span class="params">(ProductSpec... specs)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> CombinableSpec(Arrays.asList(specs), <span class="keyword">false</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">static</span> ProductSpec <span class="title">or</span><span class="params">(ProductSpec... specs)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> CombinableSpec(Arrays.asList(specs), <span class="keyword">true</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">static</span> ProductSpec <span class="title">not</span><span class="params">(ProductSpec spec)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ProductSpec() &#123;</div><div class="line">	  <span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product p)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> !spec.satisfy(p);</div><div class="line">      &#125;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Eleventh-Attempt-Using-Null-Object"><a href="#Eleventh-Attempt-Using-Null-Object" class="headerlink" title="Eleventh Attempt: Using Null Object"></a>Eleventh Attempt: Using Null Object</h3><p><strong><em>需求6</em></strong>：<strong>无条件过滤掉</strong>或<strong>不过滤</strong>查找所有产品</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> practical.programming.overview.ProductSpec.*;</div><div class="line"></div><div class="line">List&lt;Product&gt; products = findProducts(repo, always(<span class="keyword">false</span>));</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ProductSpec</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product p)</span></span>;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">static</span> ProductSpec <span class="title">always</span><span class="params">(<span class="keyword">boolean</span> bool)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ProductSpec() &#123;</div><div class="line">      <span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product p)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> bool;</div><div class="line">      &#125;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>至此，<code>ProductSpec</code>存在如下一些类型：</p>
+<ul>
+<li>Composite Specs: and, or</li>
+<li>Decorator Specs: not</li>
+<li>Atomic Specs: always, color, beblowWeight</li>
+</ul>
+<h3 id="Twelfth-Attempt-Using-Lambda-Expression"><a href="#Twelfth-Attempt-Using-Lambda-Expression" class="headerlink" title="Twelfth Attempt: Using Lambda Expression"></a>Twelfth Attempt: Using Lambda Expression</h3><p><code>Java8</code>可以使用<code>Lambda</code>表达式改善设计，增强表达力。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List&lt;Product&gt; products = findProducts(repo, (Product p) -&gt; p.getColor() == RED);</div></pre></td></tr></table></figure>
+<p>通过类型推演，可以进一步省略<code>Labmda</code>表达式中参数的类型信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List&lt;Product&gt; products = findProducts(repo, p -&gt; p.getColor() == RED);</div></pre></td></tr></table></figure>
+<p>当然，你可以通过提取<code>static factory</code>，构造DSL复用这些<code>Lambda</code>表达式。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FunctionalInterface</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ProductSpec</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product p)</span></span>;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">static</span> ProductSpec <span class="title">color</span><span class="params">(Color color)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> p -&gt; p.getColor() == color;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">static</span> ProductSpec <span class="title">weightBelow</span><span class="params">(<span class="keyword">int</span> limit)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> p -&gt; p.getWeight() &lt; limit;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List&lt;Product&gt; products = findProducts(repo, color(RED));</div></pre></td></tr></table></figure>
+<p>其中，<code>@FunctionalInterface</code>注解标注了<code>ProductSpec</code>是一个函数式接口，其抽象方法<code>boolean satisfy(Product p)</code>的原型描述了<code>lambda</code>表达式的<code>Function Descriptor</code>。</p>
+<h3 id="Thirteenth-Attempt-Chaining-Speciafications"><a href="#Thirteenth-Attempt-Chaining-Speciafications" class="headerlink" title="Thirteenth Attempt: Chaining Speciafications"></a>Thirteenth Attempt: Chaining Speciafications</h3><p>遗留了一个<strong>问题</strong>: 如何替换匿名内部类，使用<code>lambda</code>实现 <code>and/or/not/always</code>的语义?</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FunctionalInterface</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ProductSpec</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">satisfy</span><span class="params">(Product p)</span></span>;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">default</span> ProductSpec <span class="title">negate</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> p -&gt; !satisfy(p);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">default</span> ProductSpec <span class="title">and</span><span class="params">(ProductSpec other)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> (p) -&gt; satisfy(p) &amp;&amp; other.satisfy(p);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">default</span> ProductSpec <span class="title">or</span><span class="params">(ProductSpec other)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> (p) -&gt; satisfy(p) || other.satisfy(p);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">static</span> ProductSpec <span class="title">always</span><span class="params">(<span class="keyword">boolean</span> bool)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> p -&gt; bool;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">static</span> ProductSpec <span class="title">color</span><span class="params">(Color color)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> p -&gt; p.getColor() == color;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">static</span> ProductSpec <span class="title">belowWeight</span><span class="params">(<span class="keyword">int</span> limit)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> p -&gt; p.getWeight() &lt; limit;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里引入了<code>Java8</code>一个重要的设计工具：<code>default method</code>，简单漂亮，并巧妙地实现<code>DSL</code>的设计，用户接口变得更加流畅、友好。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List&lt;Product&gt; products = findProducts(repo, color(RED).and(belowWeight(<span class="number">10</span>)));</div></pre></td></tr></table></figure>
+<p><code>Java8</code>支持<code>default method</code>，扩展了<code>interface</code>原来的语义，从而隐式地支持了组合式设计，使的<code>OO</code>的设计更加完善和强大。</p>
+<h3 id="Fourteenth-attempt-Using-Method-Reference"><a href="#Fourteenth-attempt-Using-Method-Reference" class="headerlink" title="Fourteenth attempt: Using Method Reference"></a>Fourteenth attempt: Using Method Reference</h3><p><strong><em>需求7</em></strong>：查找所有<strong>伪劣</strong>的产品</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List&lt;Product&gt; products = findProducts(repo, p -&gt; p.fake());</div></pre></td></tr></table></figure>
+<p>可以使用<code>Method Reference</code>进一步改善<code>lambda</code>的表达力。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List&lt;Product&gt; products = findProducts(repo, Product::fake);</div></pre></td></tr></table></figure>
+<h3 id="Fifteenth-attempt-Abstracting-over-Type"><a href="#Fifteenth-attempt-Abstracting-over-Type" class="headerlink" title="Fifteenth attempt: Abstracting over Type"></a>Fifteenth attempt: Abstracting over Type</h3><p>泛化类型信息，让算法更具有通用性，并进一步增强代码的可复用性。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">filter</span><span class="params">(List&lt;T&gt; list, Predicate&lt;T&gt; p)</span> </span>&#123;</div><div class="line">  List&lt;T&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">  <span class="keyword">for</span> (T e : list) &#123;</div><div class="line">  <span class="keyword">if</span> (p.test(e)) &#123;</div><div class="line">	  result.add(e);</div><div class="line">	&#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样的实现存在一个明显的<strong>问题</strong>：泛型参数缺乏<strong>型变</strong>的能力。通过对泛型参数实施<strong>无限定类型通配符</strong>的修饰，从而使的算法实现更加具有弹性和通用性。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">filter</span><span class="params">(List&lt;? extends T&gt; list, Predicate&lt;? <span class="keyword">super</span> T&gt; p)</span> </span>&#123;</div><div class="line">  List&lt;T&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">  <span class="keyword">for</span> (T e : list) &#123;</div><div class="line">    <span class="keyword">if</span> (p.test(e)) &#123;</div><div class="line">	  result.add(e);</div><div class="line">	&#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Sixteenth-Maximize-Reusability"><a href="#Sixteenth-Maximize-Reusability" class="headerlink" title="Sixteenth: Maximize Reusability"></a>Sixteenth: Maximize Reusability</h3><p><code>and, or, not, always</code>在代数系统中具有稳定的抽象，为此需要进一步重构，以便最大化代码的可复用性。这样当需要建立诸如<code>NumberSpec, FruitSpec</code>时无需重复地再写一遍<code>and, or, not, always</code>的实现。</p>
+<p>为此，建立更为抽象的<code>Predicate</code>的概念，并将通用的、抽象的<code>negate, and, or, always</code>搬迁到<code>Predicate</code>中去，使其具有更大的可复用性。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FunctionalInterface</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Predicate</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">test</span><span class="params">(T t)</span></span>;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">default</span> Predicate <span class="title">negate</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> p -&gt; !satisfy(p);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">default</span> Predicate&lt;T&gt; <span class="title">and</span><span class="params">(Predicate&lt;? <span class="keyword">super</span> T&gt; other)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> p -&gt; satisfy(p) &amp;&amp; other.satisfy(p);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">default</span> Predicate&lt;T&gt; <span class="title">or</span><span class="params">(Predicate&lt;? <span class="keyword">super</span> T&gt; other)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> p -&gt; satisfy(p) || other.satisfy(p);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">static</span> Predicate&lt;T&gt; <span class="title">always</span><span class="params">(<span class="keyword">boolean</span> bool)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> p -&gt; bool;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>同时，将领域内的<code>color, belowWeight</code>等原子放回<code>ProductSpecs</code>工具类中去(因为不存在<code>ProductSpec</code>的接口了)，让领域内的<code>lambda</code>表达式具有更大的复用性。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductSpecs</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Predicate&lt;Product&gt; <span class="title">color</span><span class="params">(Color color)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> p -&gt; p.getColor() == color;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Predicate&lt;Product&gt; <span class="title">belowWeight</span><span class="params">(<span class="keyword">int</span> limit)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> p -&gt; p.getWeight() &lt; limit;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="title">ProductSpecs</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> AssertionError(<span class="string">"no instances"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>至此，可复用的基础设施便从领域中剥离出来，使其具有更高度的可重用性。</p>
+<h3 id="Seventeenth-Attempt-Using-Stream-API"><a href="#Seventeenth-Attempt-Using-Stream-API" class="headerlink" title="Seventeenth Attempt: Using Stream API"></a>Seventeenth Attempt: Using Stream API</h3><p><code>Java8</code>可以使用集合库的<code>Stream</code>复用代码。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.util.stream.Collectors.toList;</div><div class="line"></div><div class="line">repo.stream()</div><div class="line">    .filter(p -&gt; p.getColor() == RED &amp;&amp; p.getPrice() &lt; <span class="number">10</span>)</div><div class="line">    .collect(toList());</div></pre></td></tr></table></figure>
+<p>如果要支持并发，则可以构建<code>parallelStream</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.util.stream.Collectors.toList;</div><div class="line"></div><div class="line">repo.parallelStream()</div><div class="line">    .filter(p -&gt; p.getColor() == RED &amp;&amp; p.getPrice() &lt; <span class="number">10</span>)</div><div class="line">    .collect(toList());</div></pre></td></tr></table></figure>
+<p>集合类通过<code>stream, parallelStream</code>工厂方法创建<code>Stream</code>之后，其操作可分为<code>2</code>种基本类型：</p>
+<ul>
+<li>Transformation：其返回值为<code>Stream</code>类型</li>
+<li>Action：其返回值不是<code>Stream</code>类型</li>
+</ul>
+<p>通过<code>Stream</code>的机制，实现了集合类的惰性求值，直至<code>Action</code>才真正地开始执行计算。<code>Transformation</code>从某种意义上，可以看成是<code>Stream</code>的<code>Builder</code>，直至<code>Action</code>启动执行。</p>
+<h3 id="Eighteenth-attempt-Replace-Java-with-Scala"><a href="#Eighteenth-attempt-Replace-Java-with-Scala" class="headerlink" title="Eighteenth attempt: Replace Java with Scala"></a>Eighteenth attempt: Replace Java with Scala</h3><p><code>Scala</code>语言是一门跨越<code>OO</code>和<code>FP</code>的一个混血儿，可以方便地与<code>Java</code>进行互操作。在<code>Scala</code>中，函数作为一等公民，使用<code>Lambda</code>是一个很自然的过程。当你熟悉了<code>Scala</code>，我相信你绝对会放弃<code>Java</code>，放弃<code>Java8</code>，犹如作者本人一样。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">repo.filter(p =&gt; p.color == <span class="type">RED</span> &amp;&amp; p.weight &lt; <span class="number">10</span>)</div></pre></td></tr></table></figure>
+<p>遗留了三个<strong>问题</strong>: </p>
+<ul>
+<li>如何复用<code>lambda</code>表达式？</li>
+<li>如何实现 <code>and/or/not</code>的语义？</li>
+<li>如何实现 <code>always</code>的语义？</li>
+</ul>
+<h3 id="Nineteenth-Attempt-Abstracting-Control-Structure"><a href="#Nineteenth-Attempt-Abstracting-Control-Structure" class="headerlink" title="Nineteenth Attempt: Abstracting Control Structure"></a>Nineteenth Attempt: Abstracting Control Structure</h3><p>引入<strong>静态工厂方法</strong>及其<strong>操作符重载</strong>的机制构造内部<code>DSL</code>。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> <span class="type">ProductSpec</span>._</div><div class="line"></div><div class="line">repo.filter(color(<span class="type">RED</span>) &amp;&amp; belowWeight(<span class="number">10</span>))</div></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">ProductSpec</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">color</span></span>(color: <span class="type">Color</span>) = ???</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">bebowWeight</span></span>(limit: <span class="type">Int</span>) = ???</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如何替换实现<code>???</code>，并让其具有<code>&amp;&amp;, ||, !</code>的语义呢？</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">ProductSpec</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">color</span></span>(color: <span class="type">Color</span>) = <span class="keyword">new</span> <span class="type">Predicate</span>((p: <span class="type">Product</span>) =&gt; p.color == color)</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">bebowWeight</span></span>(limit: <span class="type">Int</span>) = <span class="keyword">new</span> <span class="type">Predicate</span>((p: <span class="type">Product</span>) =&gt; p.weight &lt; limit)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>Predicate</code>一个扩展匿名函数<code>A =&gt; Boolean</code>的子类，其中，从面向对象的角度看，<code>A =&gt; Boolean</code>的类型为<code>Function[A, Boolean]</code>。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Predicate</span>[<span class="type">A</span>](<span class="params">pred: <span class="type">A</span> =&gt; <span class="type">Boolean</span></span>) <span class="keyword">extends</span> (<span class="params"><span class="type">A</span> =&gt; <span class="type">Boolean</span></span>) </span>&#123;</div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(a: <span class="type">A</span>) = pred(a)</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">&amp;&amp;</span></span>(that: <span class="type">A</span> =&gt; <span class="type">Boolean</span>) = <span class="keyword">new</span> <span class="type">Predicate</span>[<span class="type">A</span>](x =&gt; pred(x) &amp;&amp; that(x))</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">||</span></span>(that: <span class="type">A</span> =&gt; <span class="type">Boolean</span>) = <span class="keyword">new</span> <span class="type">Predicate</span>[<span class="type">A</span>](x =&gt; pred(x) || that(x))</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">unary_!</span> </span>= <span class="keyword">new</span> <span class="type">Predicate</span>[<span class="type">A</span>](x =&gt; !pred(x))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其中<code>!</code>是一个一元操作符。</p>
+<h3 id="Twentieth-Attempt-Using-Companion-Object"><a href="#Twentieth-Attempt-Using-Companion-Object" class="headerlink" title="Twentieth Attempt: Using Companion Object"></a>Twentieth Attempt: Using Companion Object</h3><p><code>always</code>静态工厂方法，可以搬迁到<code>Predicate</code>的伴生对象中去。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">object Predicate &#123;</div><div class="line">  def always[A](bool: Boolean) = <span class="keyword">new</span> Predicate[A](_ =&gt; bool)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>Predicate</code>的设计既使用了<code>OO</code>的特性，又引入了<code>FP</code>的思维，<code>Scala</code>使其两者如此和谐、完美，简直不可思议。</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>世界是多样性的，计算机工业也不仅仅只存在一种方法论。在我的哲学观里，OO和FP之间并不矛盾，而是一个和谐的，相互补充的统一体。</p>
+<p>除了C++语言之外，使得我最偏爱Scala，多范式，一个问题存在多种解决方案等等思维习惯，给了程序员最灵活、最自由的空间。</p>
+<h2 id="Review-Comprator-comparing"><a href="#Review-Comprator-comparing" class="headerlink" title="Review Comprator.comparing"></a>Review <code>Comprator.comparing</code></h2><p>以标准库<code>Collections.sort</code>，及其<code>Comparator</code>在<code>Java8</code>中的增强，及其<code>Comparator.comparing</code>的泛型定义复习今天所学知识。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Collectins</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Collectins</span><span class="params">()</span> </span>&#123;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">sort</span><span class="params">(List&lt;T&gt; list, Comparator&lt;? <span class="keyword">super</span> T&gt; c)</span> </span>&#123;</div><div class="line">    list.sort(c);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用匿名内部类是<code>Collectins.sort</code>最经典的使用方法之一。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Collections.sort(products, <span class="keyword">new</span> Comparator() &#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Product p1, Product p2)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> p1.getName().compareTo(p2.getName);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>可以通过<code>lambda</code>表达式替代匿名内部类，简化设计。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Collections.sort(products, (Product p1, Product p2) -&gt; p1.getName().compareTo(p2.getName));</div></pre></td></tr></table></figure>
+<p>通过类型推演，但依然得到编译器类型安全的保护。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Collections.sort(products, (p1, p2) -&gt; p1.getName().compareTo(p2.getName));</div></pre></td></tr></table></figure>
+<p>通过<code>Comprator.compring</code>的静态工厂方法，改善表达力。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Collections.sort(persons, comparing(p -&gt; p.getName()))</div></pre></td></tr></table></figure>
+<p>通过<code>Function Reference</code>的机制，进一步改善表达力。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Collections.sort(persons, comparing(Person::getName()))</div></pre></td></tr></table></figure>
+<p>其中，<code>Comprator.compring</code>的实现为:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FunctionalInterface</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Comparator</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">(T o1, T o2)</span></span>;</div><div class="line"></div><div class="line">  <span class="keyword">static</span> &lt;T, U extends Comparable&lt;? <span class="keyword">super</span> U&gt;&gt; Comparator&lt;T&gt; </div><div class="line">    comparing(Function&lt;? <span class="keyword">super</span> T, ? extends U&gt; extractor) &#123;</div><div class="line">      <span class="keyword">return</span> (c1, c2) -&gt; extractor.apply(c1).compareTo(extractor.apply(c2));</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><a href="https://www.ibm.com/developerworks/cn/java/j-lo-java8streamapi/" target="_blank" rel="external">外部阅读</a><br><a href="https://github.com/iamfoxuriel/java8stream" target="_blank" rel="external">source</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/Java/">Java</a> <a class="tag tag--primary tag--small t-link" href="/tags/Java-8/">Java 8</a> <a class="tag tag--primary tag--small t-link" href="/tags/Stream/">Stream</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/22/intro-to-reactive-extension/"  data-tooltip="ReactiveX">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/25/intro-to-prolog/" data-tooltip="Prolog初窥">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.rabears.com/2015/11/10/java-8-stream/">
+                    <i class="fa fa-facebook-official"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.rabears.com/2015/11/10/java-8-stream/">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=ra-59b794718357a377&amp;source=men-300&amp;lng=zh-cn&amp;s=wechat&amp;url=https://blog.rabears.com/2015/11/10/java-8-stream/">
+                    <i class="fa fa-weixin"></i>
+                </a>
+            </li>
+        
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+                <div id="gitment" >
+</div>
+<script type="text/javascript">
+    var gitment = new Gitment({
+                   id: 'https://blog.rabears.com/2015/11/10/java-8-stream/',
+                   owner: 'iamfoxuriel',
+                   repo: 'rabears.com',
+                   oauth: {
+                     client_id: '2a926eb0f402a8217178',
+                     client_secret: '315caf2d8f2db9a9340ee3858803faff2474b6f9',
+                   },
+                 })
+    if(!!gitment){
+        gitment.render('gitment');
+    }
+ </script>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2017 Jaden Zhuang. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/03/22/intro-to-reactive-extension/"  data-tooltip="ReactiveX">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/25/intro-to-prolog/" data-tooltip="Prolog初窥">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.rabears.com/2015/11/10/java-8-stream/">
+                    <i class="fa fa-facebook-official"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.rabears.com/2015/11/10/java-8-stream/">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=ra-59b794718357a377&amp;source=men-300&amp;lng=zh-cn&amp;s=wechat&amp;url=https://blog.rabears.com/2015/11/10/java-8-stream/">
+                    <i class="fa fa-weixin"></i>
+                </a>
+            </li>
+        
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <i id="btn-close-shareoptions" class="fa fa-close"></i>
+    <ul class="share-options">
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.rabears.com/2015/11/10/java-8-stream/">
+                    <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://blog.rabears.com/2015/11/10/java-8-stream/">
+                    <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=ra-59b794718357a377&amp;source=men-300&amp;lng=zh-cn&amp;s=wechat&amp;url=https://blog.rabears.com/2015/11/10/java-8-stream/">
+                    <i class="fa fa-weixin"></i><span>分享到 WeChat</span>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/profile.png" alt="作者的图片"/>
+        
+            <h4 id="about-card-name">Jaden Zhuang</h4>
+        
+            <div id="about-card-bio"><p>Developer <span class='amp'>&amp;</span> Dreamer <br/> Life’s a struggle <br/> 有多少夜痛苦烦恼着你无法入睡…</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Software Engineer</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Xiamen/China
+            </div>
+        
+    </div>
+</div>
+
+        <div id="algolia-search-modal" class="modal-container">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="close-button"><i class="fa fa-close"></i></span>
+            <i class="search-icon fa fa-search"></i>
+            <form id="algolia-search-form">
+                <input type="text" id="algolia-search-input" name="search"
+                    class="form-control input--large search-input" placeholder="Search "
+                    />
+            </form>
+        </div>
+        <div class="modal-body">
+            <div class="no-result text-color-light text-center">没有找到文章</div>
+            <div class="results">
+                
+                <div class="media">
+                    
+                    <div class="media-left">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2009/11/08/20th-anniversary-of-the-fall-of-the-berlin-wall/">
+                            <img class="media-image" src="https://blog.rabears.com/2009/11/08/20th-anniversary-of-the-fall-of-the-berlin-wall/BerlinerMauer.jpg" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2009/11/08/20th-anniversary-of-the-fall-of-the-berlin-wall/">
+                            <h3 class="media-heading">柏林墙倒20年</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2009年11月8日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>柏林墙是一个标志，也是一段记忆。</p>
+<p>1989年的11月9日，柏林墙在东、西德人民的欢呼声中倒塌。在柏林墙倒塌20年之后，那里的人们是否真正“跨跃”了那道墙？<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-left">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2010/04/28/unemployed-guys/">
+                            <img class="media-image" src="https://blog.rabears.com/2010/04/28/unemployed-guys/unemployeed.jpg" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2010/04/28/unemployed-guys/">
+                            <h3 class="media-heading">待业青年</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2010年4月28日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>在待业的这些日子里 看了红透网络的《待业青年》<br>简介是这样的：<br><blockquote class="pullquote"><p>这样的一群年轻人，他们才华横溢，他们生不逢时，他们崇尚艺术，他们叛逆，他们无助，他们被认为是社会的渣滓，而他们自命不凡，他们有情有义，他们 有时自甘堕落，他们有时愤世嫉俗，他们有时终日买醉，他们有时迷茫不已……</p>
+</blockquote><br>——谨以此片献给我们逝去的青春 特别是那些不喜欢上学的孩子<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2011/09/07/punch-on-25/">
+                            <h3 class="media-heading">25岁的捶</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2011年9月7日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>因为你必须用你脆弱的躯体去保护你所爱的人<br>不管愿不愿意，背好十字架，走下去<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2014/06/27/column-based-storage/">
+                            <h3 class="media-heading">列式存储(Column Based Storage)</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2014年6月27日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>目前大数据存储有两种方案可供选择：行存储和列存储。<br>业界对两种存储方案有很多争持，集中焦点是:谁能够更有效地处理海量数据，且兼顾安全、可靠、完整性。从目前发展情况看，关系数据库已经不适应这种巨大的存储量和计算要求，基本是淘汰出局。在已知的几种大数据处理软件中，Hadoop的HBase采用列存储，MongoDB是文档型的行存储，Lexst是二进制型的行存储。在这里，我不讨论这些软件的技术和优缺点，只围绕机械磁盘的物理特质，分析行存储和列存储的存储特点，以及由此产生的一些问题和解决办法。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2015/07/01/actor-model/">
+                            <h3 class="media-heading">Actor 模型</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2015年7月1日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><hr>
+<p>我们的CPU没有变得更快，但是我们现在的CPU拥有多个内核。 如果我们想要利用我们现在可用的所有这些硬件，我们需要一种并发运行代码的方法。 几十年的难以追踪的错误和开发者的沮丧表明，<code>threads</code>不是要走的路。 但是不要害怕，那里有很好的选择，今天向你展示其中之一：Actor 模型。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2015/09/25/intro-to-prolog/">
+                            <h3 class="media-heading">Prolog初窥</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2015年9月25日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><blockquote class="pullquote"><p>事实是我们对这个世界直接观察的结果。规则是关于现实世界的逻辑推论。</p>
+</blockquote>
+<p>Prolg(Programing in logic)是其实属于DSL,并不算是完整意义上的编程语言，是一阶谓词为基础的逻辑性语言<br>在Prolog中变量的命名是有特殊要求的，如果一个词以小写字母开头，它就是一个原子(atom)，类似于其他语言中的符号(symbol)，如果一个词以大写或下划线开头，那么它就是一个变量，和其他语言一样变量值可以改变，可以赋值（不过更灵活）。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2015/11/10/java-8-stream/">
+                            <h3 class="media-heading">Java 8 Stream</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2015年11月10日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><blockquote>
+<p>Java 8 中的 Stream 是对集合（Collection）对象功能的增强，它专注于对集合对象进行各种非常便利、高效的聚合操作（aggregate operation），或者大批量数据操作 (bulk data operation)。Stream API 借助于同样新出现的 Lambda 表达式，极大的提高编程效率和程序可读性<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-left">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2016/03/22/intro-to-reactive-extension/">
+                            <img class="media-image" src="https://blog.rabears.com/2016/03/22/intro-to-reactive-extension/Rx.png" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2016/03/22/intro-to-reactive-extension/">
+                            <h3 class="media-heading">ReactiveX</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年3月22日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><blockquote><p>ReactiveX 简称 Rx，全称 Reactive Extensions，最初是LINQ的一个扩展，由微软的架构师Erik Meijer领导的团队开发，在2012年11月开源，Rx是一个编程模型，目标是提供一致的编程接口，帮助开发者更方便的处理异步数据流。</p>
+</blockquote></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://blog.rabears.com/2016/10/26/stephen-hawking/">
+                            <h3 class="media-heading">Stephen Hawking launches Centre for the Future of Intelligence</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年10月26日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><blockquote><p>Alongside the benefits, AI will also bring dangers, like powerful autonomous weapons, or new ways for the few to oppress the many.</p>
+<footer><strong>Stephen Hawking</strong><cite><a href="http://www.cam.ac.uk/research/news/the-best-or-worst-thing-to-happen-to-humanity-stephen-hawking-launches-centre-for-the-future-of" target="_blank" rel="external">www.cam.ac.uk</a></cite></footer></blockquote>
+<p>Artificial intelligence has the power to eradicate poverty and disease or hasten the end of human civilisation as we know it – according to a speech delivered by Professor Stephen Hawking this evening.</p>
+<blockquote class="pullquote right"><p>Alongside the benefits, AI will also bring dangers, like powerful autonomous weapons, or new ways for the few to oppress the many.</p>
+</blockquote>
+<p>“Success in creating AI could be the biggest event in the history of our civilisation,” said Professor Hawking. “But it could also be the last – unless we learn how to avoid the risks. Alongside the benefits, AI will also bring dangers like powerful autonomous weapons or new ways for the few to oppress the many.</p>
+<p>“We cannot predict what we might achieve when our own minds are amplified by AI. Perhaps with the tools of this new technological revolution, we will be able to undo some of the damage done to the natural world by the last one – industrialisation.”</p>
+<p>The Centre for the Future of Intelligence will initially focus on seven distinct projects in the first three-year phase of its work, reaching out to brilliant researchers and connecting them and their ideas to the challenges of making the best of AI. Among the initial research topics are: ‘Science, value and the future of intelligence’; ‘Policy and responsible innovation’; ‘Autonomous weapons – prospects for regulation’ and ‘Trust and transparency’.</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://www.zfanw.com/blog/my-uncle-not-exist.html">
+                            <h3 class="media-heading">我的舅舅</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年11月26日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><blockquote><p>年轻时我很穷，觉得自己配不上女人，所以只能自己解决；等到老了，有钱了，可以养多个女人了，我却不行了。</p>
+<p>我舅舅以为，这句话可以当作他这一生的总结句了。</p>
+<footer><strong>一位舊人</strong></footer></blockquote></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p class="results-count text-medium"
+                data-message-zero="没有找到文章"
+                data-message-one="找到 1 篇文章"
+                data-message-other="找到 {n} 篇文章">
+                找到 14 篇文章
+            </p>
+        </div>
+    </div>
+</div>
+
+        
+
+
+<div id="cover"></div>
+
+
+        <!--SCRIPTS-->
+<script src="/assets/js/script.js"></script>
+<!--SCRIPTS END-->
+
+    
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>
+    <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <script>
+        var algoliaClient = algoliasearch('V7X4W5V99K', '56ea9c94b8a2a0f51e18e78c97bce433');
+        var algoliaIndex = algoliaClient.initIndex('blog_index');
+    </script>
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+    </body>
+</html>
