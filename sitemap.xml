@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.rabears.com/2017/12/05/witness-death/</loc>
+    
+    <lastmod>2017-12-27T06:45:06.148Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.rabears.com/2017/06/03/smbo/</loc>
+    
+    <lastmod>2017-12-27T06:19:50.599Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.rabears.com/2017/12/27/fp-in-scala/</loc>
+    
+    <lastmod>2017-12-27T06:10:15.321Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.rabears.com/2015/07/01/actor-model/</loc>
     
     <lastmod>2017-11-02T08:49:29.831Z</lastmod>
@@ -12,13 +33,6 @@
     <loc>https://blog.rabears.com/2017/11/01/unabomber/</loc>
     
     <lastmod>2017-11-02T06:54:48.871Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.rabears.com/2017/06/03/smbo/</loc>
-    
-    <lastmod>2017-11-01T09:16:43.323Z</lastmod>
     
   </url>
   
